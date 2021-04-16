@@ -4,24 +4,28 @@ var length = data.length;
 // -----------------------
 
 ///*
-function place_ball() {
+function place_ball_loop() {
     setTimeout(function() {
         //console.log("beginning data length: " + data.length);
         //console.log("beginning variable length: " + length);
-        var number = data.splice(Math.floor(Math.random()*length-1),1);
+        number = data.splice(Math.floor(Math.random()*length-1),1);
         //console.log(number[0]);
-        var ball = number[0];
+        ball = number[0];
         create(ball.x, ball.y, ball.color);
         length = data.length;
         //console.log("ending data length: " + data.length);
         //console.log("ending variable length: " + length);
         if (length > 0) {
-            place_ball();
+            place_ball_loop();
         }
     }, 1)
 }
 
-place_ball();
+var number = data.splice(Math.floor(Math.random()*length-1),1);
+var ball = number[0];
+create(ball.x, ball.y, ball.color);
+length = data.length;
+place_ball_loop();
 //*/
 
 /*
