@@ -1,7 +1,9 @@
-var counter = 0
+var time = 2000
+var position = 0
+var velocity = 5
 function count(number) {
-    console.log("Counter: " + counter);
-    counter++;
+    console.log("Position: " + position);
+    position = position + velocity;
 }
 
-setInterval(count,3000);
+setInterval(count,time);
