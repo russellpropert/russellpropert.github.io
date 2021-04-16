@@ -123,8 +123,8 @@ var painting = ["#fefefe","#ffffff","#ffffff","#ffffff","#ffffff","#ffffff","#ff
 //var ball;
 //ball = create();
 
-//var x = 0;
-//var y = 0;
+var x = 0;
+var y = 0;
 var counter = 0;
 var data = [];
 
