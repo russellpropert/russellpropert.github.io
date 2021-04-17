@@ -24,8 +24,8 @@ var ball3color = "violet"
 
 var ball4 = document.getElementById('ball4');
 var ball4velocity = 1;
-var ball4width = 30;
-var ball4height = 30;
+var ball4width = 15;
+var ball4height = 15;
 var ball4left_center = 350;
 var ball4top_center = 350;
 var ball4radius = 250;
@@ -40,7 +40,7 @@ var ball5left_center = 350;
 var ball5top_center = 350;
 var ball5radius = 290;
 var ball5angle = 0;
-var ball5color = "lightblue"
+var ball5color = "burlywood"
 
 var ball6 = document.getElementById('ball6');
 var ball6velocity = 1;
@@ -50,7 +50,17 @@ var ball6left_center = 350;
 var ball6top_center = 350;
 var ball6radius = 350;
 var ball6angle = 90;
-var ball6color = "red"
+var ball6color = "#48accc"
+
+var ball7 = document.getElementById('ball7');
+var ball7velocity = 1;
+var ball7width = 20;
+var ball7height = 20;
+var ball7left_center = 350;
+var ball7top_center = 350;
+var ball7radius = 400;
+var ball7angle = 180;
+var ball7color = "darkorange"
 
 function move_ball1() {
   var ball1width = window.innerWidth - 50;
@@ -169,10 +179,6 @@ function move_ball4() {
 
   var ball4left_position = (Math.cos(ball4angle * (Math.PI / 180)) * ball4radius) + ball4left_center;
   var ball4top_position = (Math.sin(ball4angle * (Math.PI / 180)) * ball4radius) + ball4top_center;
-  console.log(ball4angle);
-  console.log(ball4left_position);
-  console.log(ball4top_position);
-
 
   ball4.style.left = ball4left_position - ball4width / 2 + 'px';
   ball4.style.top = ball4top_position - ball4height / 2 + 'px';
@@ -191,10 +197,6 @@ function move_ball5() {
 
   var ball5left_position = (Math.cos(ball5angle * (Math.PI / 180)) * ball5radius) + ball5left_center;
   var ball5top_position = (Math.sin(ball5angle * (Math.PI / 180)) * ball5radius) + ball5top_center;
-  console.log(ball5angle);
-  console.log(ball5left_position);
-  console.log(ball5top_position);
-
 
   ball5.style.left = ball5left_position - ball5width / 2 + 'px';
   ball5.style.top = ball5top_position - ball5height / 2 + 'px';
@@ -231,6 +233,24 @@ function move_ball6() {
   }
 }
 
+function move_ball7() {
+
+  var ball7left_position = (Math.cos(ball7angle * (Math.PI / 180)) * ball7radius) + ball7left_center;
+  var ball7top_position = (Math.sin(ball7angle * (Math.PI / 180)) * ball7radius) + ball7top_center;
+
+  ball7.style.left = ball7left_position - ball7width / 2 + 'px';
+  ball7.style.top = ball7top_position - ball7height / 2 + 'px';
+  ball7.style.width = ball7width + 'px';
+  ball7.style.height = ball7height + 'px';
+  ball7.style.background = ball7color;
+
+  if (ball7angle >= 359) {
+    ball7angle = 0;
+  } else {
+    ball7angle = ball7angle + ball7velocity;
+  }
+}
+
 
 setInterval(move_ball1,10);
 setInterval(move_ball2,10);
@@ -238,3 +258,4 @@ setInterval(move_ball3,10);
 setInterval(move_ball4,10);
 setInterval(move_ball5,13);
 setInterval(move_ball6,16);
+setInterval(move_ball7,20);
