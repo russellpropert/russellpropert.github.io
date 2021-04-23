@@ -1,0 +1,16 @@
+<script>
+
+    let notFound = true;
+    let counter = 0;
+
+    while(notFound) {
+        if(counter === 5000) {
+            notFound = false; //this prevents the infinite loop.
+            console.log('found 5000');
+        } else {
+            console.log('still looking');
+        }
+        counter += 1;
+    }
+
+</script>

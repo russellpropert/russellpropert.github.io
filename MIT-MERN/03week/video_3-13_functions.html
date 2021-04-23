@@ -1,0 +1,14 @@
+<script>
+    const aaaA = [1,2,3];
+    const aaf1 = function aaf1(b) {
+        console.log('f1:' + b)
+        return b[0];
+    }
+    const aaf2 = function aaf2(a) {
+        a[0] = -1;
+        a[1] = aaf1(a);
+        console.log('f2:' + a)
+        return a;
+    };
+    console.log('result:' + aaf2(aaaA))
+</script>
