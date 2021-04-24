@@ -669,41 +669,41 @@ let length;
 
     ```javascript
     // bad - raises exception
-  const luke = {}
-  const leia = {}
-  [luke, leia].forEach((jedi) => jedi.father = 'vader')
+    const luke = {}
+    const leia = {}
+    [luke, leia].forEach((jedi) => jedi.father = 'vader')
 
-  // bad - raises exception
-  const reaction = "No! That’s impossible!"
-  (async function meanwhileOnTheFalcon() {
-    // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
-    // ...
-  }())
+    // bad - raises exception
+    const reaction = "No! That’s impossible!"
+    (async function meanwhileOnTheFalcon() {
+      // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
+      // ...
+    }())
 
-  // bad - returns `undefined` instead of the value on the next line - always happens when `return` is on a line by itself because of ASI!
-  function foo() {
-    return
-      'search your feelings, you know it to be foo'
-  }
+    // bad - returns `undefined` instead of the value on the next line - always happens when `return` is on a line by itself because of ASI!
+    function foo() {
+      return
+        'search your feelings, you know it to be foo'
+    }
 
-  // good
-  const luke = {};
-  const leia = {};
-  [luke, leia].forEach((jedi) => {
-    jedi.father = 'vader';
-  });
+    // good
+    const luke = {};
+    const leia = {};
+    [luke, leia].forEach((jedi) => {
+      jedi.father = 'vader';
+    });
 
-  // good
-  const reaction = "No! That’s impossible!";
-  (async function meanwhileOnTheFalcon() {
-    // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
-    // ...
-  }());
+    // good
+    const reaction = "No! That’s impossible!";
+    (async function meanwhileOnTheFalcon() {
+      // handle `leia`, `lando`, `chewie`, `r2`, `c3p0`
+      // ...
+    }());
 
-  // good
-  function foo() {
-    return 'search your feelings, you know it to be foo';
-  }
+    // good
+    function foo() {
+      return 'search your feelings, you know it to be foo';
+    }
     ```
 
     [Read more](http://stackoverflow.com/a/7365214/1712802).
