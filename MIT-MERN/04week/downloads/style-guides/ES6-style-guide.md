@@ -681,7 +681,7 @@ let length;
     }())
 
     // bad - returns `undefined` instead of the value on the next line - always happens 
-    //when `return` is on a line by itself because of ASI (Automatic Semicolon Insertion)!
+    // when `return` is on a line by itself because of ASI (Automatic Semicolon Insertion)!
     function foo() {
       return
         'search your feelings, you know it to be foo'
