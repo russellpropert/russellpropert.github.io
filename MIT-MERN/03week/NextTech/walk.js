@@ -3,7 +3,7 @@
 const area = {
   element: document.getElementById('area'),
   width: 600,
-  height: 400,
+  height: 700
 };
 
 // No need to change the following code
@@ -39,34 +39,34 @@ function create(color, dx, dy) {
   // TODO: Set newBall properties: dx, dy, width, height
   newBall.dx = dx;
   newBall.dy = dy;
-  newBall.width = 40;
-  newBall.height = 40;
+  newBall.width = '';
+  newBall.height = '';
   // TODO: set the newBall.element property and initialize it to a Html element "div"
   newBall.element = document.createElement("div");
   // TODO: set the backgroundColor, width and height style properties for newBall.element
   newBall.element.style.backgroundColor = color;
-  newBall.element.style.width = newBall.width + 'px';
-  newBall.element.style.height = newBall.height + 'px';
+  newBall.element.style.width = '40' + 'px';
+  newBall.element.style.height = '40' + 'px';
   // This line set the CSS class for newBall.element. No need to change this line
   newBall.element.className += ' ball';
 
   // TODO: set the width and height of newBall based on newBall.element
   // Hint: use the Javascript parseInt() function to convert a string value to integer
   newBall.width = parseInt(newBall.element.style.width);
-  newBall.width = parseInt(newBall.element.style.height);
+  newBall.height = parseInt(newBall.element.style.height);
   // TODO: use the Javascript appendChild() function to add newBall.element to the area element
-  area.element.appendChild(newBall.element)
+  area.element.appendChild(newBall.element);
   return newBall;
 }
 
 // TODO: implement the update function
 function update(ball, x, y) {
   // TODO: use the moveTo() function to move the ball
-  moveTo(ball,x,y);
+  moveTo(ball, x, y);
   // TODO: use the Javascript setTimeout() method to call changeDirectionIfNecessary() and update() every 16ms
   setTimeout(function() {
     changeDirectionIfNecessary(ball,x,y);
-    update(ball,x + ball.dx,y + ball.dy);
+    update(ball, x + ball.dx, y + ball.dy);
   },16);
 }
 
@@ -74,9 +74,12 @@ function update(ball, x, y) {
 // This is expected to create 3 balls within the area div
 
  initialize();
+
+ 
  const ball1 = create('blue', 4, 3);
  const ball2 = create('red', 1, 5);
  const ball3 = create('green', 2, 2);
+ 
  moveTo(ball1, 1, 1);
  moveTo(ball2, 10, 10);
  moveTo(ball3, 20, 20);
@@ -92,3 +95,4 @@ function update(ball, x, y) {
 if (typeof module !== 'undefined') {
   module.exports = { update, create, changeDirectionIfNecessary, moveTo, area };
 }
+
