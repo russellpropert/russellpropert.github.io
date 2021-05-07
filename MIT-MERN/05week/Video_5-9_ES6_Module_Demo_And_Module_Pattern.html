@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video_5-9_ES6_Module_Demo_And_Module_Pattern</title>
+</head>
+<body>
+  
+</body>
+<script>
+  (function () {
+    // variables declared here are hidden from the rest of the code.
+    console.log('hey');
+  })()
+
+  var Module1 = (function () {
+    return {
+      publicMethod: () => {console.log('Hey')}
+    }
+  })()
+
+  var Module2 = (function () {
+    var _privateHey = 'Hey';
+    function _privateMethod () {
+      console.log(_privateHey);
+    }
+    return {
+      publicMethod: function () {_privateMethod();}
+    }
+  })()
+</script>
+</html>

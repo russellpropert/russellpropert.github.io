@@ -1,17 +1,62 @@
 <div id="container">
   <!-- populated by JS-->
 </div>
-<script src="./posts.js"></script>
+<script src="./boston.js"></script>
 <script>
-  function renderPosts(posts, container) {
-    const len = posts.length; // posts is an array
-    var html = '';
-    for (let i = 0; i < len; i++) {
-      html += '<li class="post">' +
-        '<h2>' + posts[i].title + '</h2>' +
-        '<h3>' + posts[i].content + '</h3>'
+  function findMaxIndex(boston) {
+
+    let max = parseFloat(boston[0][11]);
+    let maxIndex = 0;
+    for(let i = 1; i < boston.length; i++) {
+      if (parseFloat(boston[i][11]) > max) {
+        max = boston[i][11];
+        maxIndex = i;
+      }
     }
-    container.innerHTML = '<ul id = "posts">' + html + '</ul>';
+
+    return maxIndex;
   }
-  renderPosts(posts, document.getElementById('container'));
+
+  function topFive(boston) {
+    let topFiveArray = [];
+    for (let i = 0; i < 5; i++) {
+      let maxIndex = findMaxIndex(boston);
+      topFiveArray.push(boston.splice(maxIndex, 1)[0])
+    }
+    renderArray(topFiveArray, 'Top Five', 'topFive');
+  }
+
+  function over100000(boston) {
+
+    let over100000Array = [];
+    for (let i = 0; i < boston.length; i++) {
+      if (parseFloat(boston[i][11]) >= 100000) {
+        over100000Array.push(boston[i]);
+      }
+    }
+
+    renderArray(over100000Array, 'Employees That Make Over $100,000', 'over100000');
+  }
+
+  function allEmployees(boston) {
+    renderArray(boston, 'All Boston Employees', 'all');
+  }
+
+  function renderArray(array, listName, id) {
+    let container = document.getElementById('container');
+    let html = '';
+    for (let i = 0; i < array.length; i++) {
+      html += '<li class="post">' +
+        '<p><b>' + array[i][8] + '</b><br>' +
+        array[i][9] + '<br>' +
+        '$' + array[i][11] + '</p>'
+    }
+
+    container.innerHTML += `<h3>${listName}</h3><ul id = "${id}">` + html + '</ul>';
+  }
+
+  topFive(boston.data);
+  //over100000(boston.data);
+  allEmployees(boston.data);
+
 </script>
