@@ -12,17 +12,17 @@
 <script>
   (function () {
     // variables declared here are hidden from the rest of the code.
-    console.log('hey');
+    console.log('Hello');
   })()
 
-  var Module1 = (function () {
+  const Module1 = (function () {
     return {
-      publicMethod: () => {console.log('Hey')}
+      publicMethod: () => {console.log('Hi')}
     }
   })()
 
-  var Module2 = (function () {
-    var _privateHey = 'Hey';
+  const Module2 = (function () {
+    const _privateHey = 'Hey';
     function _privateMethod () {
       console.log(_privateHey);
     }
@@ -30,5 +30,24 @@
       publicMethod: function () {_privateMethod();}
     }
   })()
+
+  const Module3 = (() => {
+    const privateCharacter1 = 'H';
+    const privateCharacter2 = 'e';
+    const privateCharacter3 = 'y';
+    const privateCharacter4 = '!';
+    function privateMethod() {
+      const word = privateCharacter1 + privateCharacter2 + privateCharacter3 + privateCharacter4;
+      console.log(word);
+    }
+    return {
+      publicMethod: () => {privateMethod();}
+      }
+  })()
+
+Module1.publicMethod();
+Module2.publicMethod();
+Module3.publicMethod();
+
 </script>
 </html>
