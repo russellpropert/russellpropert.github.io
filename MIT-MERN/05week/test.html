@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+</head>
+<body>
+  <div id="test"></div>
+</body>
+<script>
+  //1
+  const array = [2, 4, 7.5, 1.55778, 9, 56.76, 3, 23, 64];
+  document.getElementById('test').innerHTML = `<p>1. ${array}</p>`;
+
+  //2
+  array.map(a => a * 10);
+  document.getElementById('test').innerHTML += `<p>2. ${array}</p>`;
+  const arrayX10 = array.map(a => a * 10); //Returns a copy of the array.
+  document.getElementById('test').innerHTML += `<p>2. ${arrayX10}</p>`;
+
+  //3
+  array.sort(); //Processes elements as text.
+  document.getElementById('test').innerHTML += `<p>3. ${array}</p>`;
+
+  //4
+  array.filter(a => a > 9);
+  document.getElementById('test').innerHTML += `<p>4. ${array}</p>`;
+  const arrayFiltered = array.filter(a => a > 9); //Also returns a copy.
+  document.getElementById('test').innerHTML += `<p>4. ${arrayFiltered}</p>`;
+
+  //5
+  array.sort((a, b) => a - b); //Processes elements as numbers.
+  document.getElementById('test').innerHTML += `<p>5. ${array}</p>`;
+</script>
+</html>
