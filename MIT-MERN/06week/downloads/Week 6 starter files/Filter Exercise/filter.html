@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
+<body>
+  <p id='content'></p>
+</body>
 <script>
 
+const content = document.getElementById('content');
 const employees = [
   {name: 'peter', salary: 100000},
   {name: 'bruce', salary: 425000},
   {name: 'hanna', salary: 750000},
-  {name: 'james', salary: 550800}    
+  {name: 'james', salary: 550800}
 ];
 
 function isBigEnough(element) {
-  let comparison = element.salary <= 500000;
-  return comparison;  	
+  //let comparison = element.salary >= 500000;
+  let comparison = (element.name[2] === 't' || element.name[2] === 'n');
+  console.log(element.name[2]);
+  return comparison;
 }
 
 const filtered = employees.filter(isBigEnough);
 console.log(JSON.stringify(filtered));
+//content.innerHTML = JSON.stringify(filtered);
+filtered.forEach((a) => {content.innerHTML += `${a.name} makes ${a.salary} a year.<br>`;});
 
 </script>
 </html>
