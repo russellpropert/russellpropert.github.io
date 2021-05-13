@@ -16,7 +16,7 @@ function generateDataset(points){
   for (var i=0; i<length; i++){
       var p = points[i];
       //var point = [p.x, p.y];
-      var point = [i, p.salary];
+      var point = [index, p.salary];
       dataset[index] = point;
       index++;
   }
@@ -33,13 +33,16 @@ function drawChart(dataset) {
   var data = google.visualization.arrayToDataTable(dataset);
 
   var options = {
-    title: 'City of Chicago Salaries',
-     pointSize: 1,
-     curveType: 'function',
-     vAxis: {gridlines:{count:20}}
+    title: `City of Chicago Salaries for the ${department} Department`,
+    pointSize: 1,
+    curveType: 'function',
+    vAxis: {gridlines:{count:20}},
+    chartArea: {'width': '80%', 'height': '80%'}
   };
 
   var target = document.getElementById('chart_div');
   var chart = new google.visualization.ScatterChart(target);
+
   chart.draw(data, options);
+
 }

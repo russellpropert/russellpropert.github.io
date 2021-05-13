@@ -4,15 +4,28 @@
 <script src="chart.js"></script>
 <script src="salaries.js"></script>
 
-<div id="chart_div" style="width: 1280px; height: 1280px;"></div>
+<div id="chart_div" style="width: 1250; height: 1280px;"></div>
 
 <script>
-const salaries = chicago.data;
+let salaries = chicago.data;
+let department = 'AVIATION'
 
-const generatePoints = function(){
+// List of departemnts
+let departments = []
+for (let i = 0; i < salaries.length; i++) {
+		departments.push(salaries[i][10]);
+}
 
+departments = departments.filter((item, index) => {return departments.indexOf(item) === index}).sort();
+console.log(departments);
+
+// log out highest salary
+console.log(salaries.sort((b, a) => a[11] - b[11]).slice(0, 1));
+
+const generatePoints = () => {
 	const points  = [];
-	salaries.forEach(function(item){
+	salaries = salaries.filter(a => {return a[10] === department;});
+	salaries.forEach((item) => {
 		points.push({
 			job    : item[9],
 			salary : Number(item[11])
@@ -20,18 +33,14 @@ const generatePoints = function(){
 	});
 
 	// order by salary
-	// points.sort(compare);
+	points.sort(compare);
 
 	return points;
 };
 
 function compare(a, b) {
-	// --------------------------
- 	//		YOUR CODE
- 	// 	Uncomment line 23 once
- 	//	you are you have written
- 	//  the compare function
- 	// --------------------------
+	//return a.job - b.job;
+	return a.salary - b.salary;
 }
 
 
