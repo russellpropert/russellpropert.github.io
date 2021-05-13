@@ -32,7 +32,7 @@ function drawChart(dataset) {
   var options = {
     title: 'What zip code has the most graffiti reports?',
     subtitle: 'exploration graffiti reports',
-    'chartArea': {'width': '75%', 'height': '95%'}
+    'chartArea': {'width': '72%', 'height': '92%'}
   };
 
   var target = document.getElementById('chart_div');
