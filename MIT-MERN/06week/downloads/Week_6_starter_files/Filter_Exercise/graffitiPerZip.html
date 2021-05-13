@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="zipCodes.js"></script>
+<script src="graffiti_july_2015.js"></script>
+<script src="graffiti_chart.js"></script>
+
+<div id="chart_div" style="width: 1150px; height: 1800px;"></div>
+
+<script>
+
+let graffiti = [];
+
+// There are two duplicates in zipCodes – 60643 and 60707.
+console.log(zipCodes.filter((item, index) => {return zipCodes.indexOf(item) !== index}));
+// filter zipCodes for duplicates
+zipCodes = [...new Set(zipCodes)];
+
+
+
+const graffitiReports = (zip) => {
+	let matching;
+	matching = chicago.data.filter((report) => {
+		let result = report[16] === zip;
+		return result;
+	});
+
+	let obj;
+	obj = {};
+	obj.zip = zip;
+	obj.reports = matching.length;
+	graffiti.push(obj);
+}
+
+// sort by zip
+//zipCodes.sort((a, b) => a - b).forEach(graffitiReports);
+
+zipCodes.forEach(graffitiReports);
+
+//////// graph graffiti reports data ////////
+
+// sort by number of reports descending
+graffiti.sort((b, a) => a.reports - b.reports);
+
+// sort by zip
+//graffiti.sort((a, b) => a.zip - b.zip);
+
+window.onload = function(){
+    const dataset = generateDataset(graffiti);	
+    drawChart(dataset);
+};
+
+</script>
+</html>

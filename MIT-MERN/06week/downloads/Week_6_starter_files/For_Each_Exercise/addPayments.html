@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<p id="content"></p>
+</body>
+<script src="payments_2005_to_2010.js"></script>
+<script>
+
+let content = document.getElementById('content');
+let payments = 0
+function add(item){
+	payments += Number(item[9]);
+	//content.innerHTML += item[9] + '<br>';
+}
+
+chicago.data.forEach(add);
+console.log(payments);
+
+</script>
+</html>
