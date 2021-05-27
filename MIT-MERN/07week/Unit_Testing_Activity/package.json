@@ -1,0 +1,15 @@
+{
+  "name": "unit_testing_activity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "greet.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.0.1"
+  }
+}
