@@ -9,30 +9,18 @@
 <body>
   <div id="container">></div>
 </body>
+<script src="./posts.js"></script>
 <script>
-  const url = "https://pollysnips.s3.amazonaws.com/posts.json";
-
-  const renderPosts = (posts) => {
+  const renderPosts = (posts, container) => {
     let html = ''
     for (let i = 0; i < posts.length; i++) {
       html += '<li class="post">' +
         '<h3>' + posts[i].title + '</h3>' +
         '<p>' + posts[i].content + '</p>'
     }
-    const container = document.getElementById('container');
+
     container.innerHTML = '<ul id = "posts">' + html + '</ul>';
   }
-
-  async function getPosts(json) {
-    const response = await fetch(json);
-    const posts = await response.json();
-    renderPosts(posts);
-  }
-
-  getPosts(url);
-  const wait = () => {
-    getPosts('./posts.json')
-  }
-  setTimeout(wait, 2000);
+  renderPosts(posts, document.getElementById('container'));
 </script>
 </html>

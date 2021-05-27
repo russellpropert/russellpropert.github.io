@@ -3,11 +3,11 @@ var posts = [{
     content: "great place to hang out"
   },
   {
-    title: "cricket",
+    title: "Cricket",
     content: "takes a long time to master"
   },
   {
-    title: "marmalade",
+    title: "Marmalade",
     content: "chunky is the best"
   },
   {
