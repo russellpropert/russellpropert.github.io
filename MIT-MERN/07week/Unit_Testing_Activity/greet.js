@@ -10,4 +10,4 @@ const greet = (name) => {
   }
 }
 
-module.exports = greet;
+module.exports = {greet};
