@@ -4,10 +4,11 @@
   "description": "Testing Hello World",
   "main": "hello.js",
   "dependencies": {
-    "course-utilities": "^1.0.0",
-    "jest": "^26.1.0"
+    "course-utilities": "^1.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^27.0.2"
+  },
   "scripts": {
     "test": "jest"
   },
