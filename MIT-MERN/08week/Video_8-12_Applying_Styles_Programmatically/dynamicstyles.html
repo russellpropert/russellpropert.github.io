@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Color Tiles – CSS Dynamic Styles Project</title>
+  <link rel="stylesheet" href="dynamicstyles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+</head>
+<body>
+  <p>Choose a color, then click a box.</p>
+  <div class="buttonGrid">
+    <button id="redButton" onclick="red()" class=>Red</button>
+    <button id="orangeButton" onclick="orange()">Orange</button>
+    <button id="yellowButton" onclick="yellow()">Yellow</button>
+    <button id="greenButton" onclick="green()">Green</button>
+    <button id="blueButton" onclick="blue()">Blue</button>
+    <button id="purpleButton" onclick="purple()">Purple</button>
+  </div>
+  <div style="height: 50px;"></div>
+  <div class="colorGrid">
+    <div id="one" onclick="changeBackground('one')" class="box"></div>
+    <div id="two" onclick="changeBackground('two')" class="box"></div>
+    <div id="three" onclick="changeBackground('three')" class="box"></div>
+    <div id="four" onclick="changeBackground('four')" class="box"></div>
+    <div id="five" onclick="changeBackground('five')" class="box"></div>
+    <div id="six" onclick="changeBackground('six')" class="box"></div>
+    <div id="seven" onclick="changeBackground('seven')" class="box"></div>
+    <div id="eight" onclick="changeBackground('eight')" class="box"></div>
+    <div id="nine" onclick="changeBackground('nine')" class="box"></div>
+  </div>
+
+  <script src="dynamicstyles.js"></script>
+</body>
+</html>
