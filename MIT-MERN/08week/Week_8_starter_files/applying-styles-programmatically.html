@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Dynamic Styles</title>
+  <style>
+    .on {
+      background: orange;
+    }
 
+    div {
+      padding: 50px;
+      text-align: center;
+      border-style: solid;
+      font-size: 2em;
+    }
+  </style>
 </head>
 <body>
+  <button onclick="off()">OFF</button>
+  <button onclick="on()">ON</button>
+  <div id="target">Target</div>
 
+  <script>
+    const element = document.getElementById('target');
+    function on() {
+      element.classList.add('on');
+    }
+
+    function off() {
+      element.classList.remove('on');
+    }
+  </script>
 </body>
 </html>
