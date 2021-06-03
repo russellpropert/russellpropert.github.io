@@ -1,0 +1,44 @@
+.grid {
+  width: 900px;
+  display: grid;
+  grid-template-areas: 
+    "primary secondary success"
+    "danger warning info"
+    "light dark primaryborder";
+}
+
+.primary{
+  grid-area: primary;
+}
+
+.secondary{
+  grid-area: secondary;
+}
+
+.success{
+  grid-area: success;
+}
+
+.danger{
+  grid-area: danger;
+}
+
+.warning{
+  grid-area: warning;
+}
+
+.info{
+  grid-area: info;
+}
+
+.light{
+  grid-area: light;
+}
+
+.dark{
+  grid-area: dark;
+}
+
+.primaryborder{
+  grid-area: primaryborder;
+}
