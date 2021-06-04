@@ -4,7 +4,7 @@
     <title>Grid</title>
     <style>
         .on{
-            background: orange;
+            background: red;
         }        
         .content{
             display: grid;
@@ -22,7 +22,10 @@
 </head>
 <body>
     <button onclick="move()">MOVE</button>
-    <main class="content">
+    <button onclick="stop()">STOP</button>
+    <button onclick="resume()">RESUME</button>
+    <button onclick="clearAll()">CLEAR</button>
+    <main id="content" class="content">
         <div id="n1">1</div>
         <div id="n2">2</div>
         <div id="n3">3</div>
@@ -125,7 +128,59 @@
         <div id="n100">100</div>
     </main>
     <script>
+        const len = document.getElementById('content').childElementCount;
+        let count = 1
+        let previous = 0
+        let timer = null;
 
+        const clearAll = () => {
+            if (timer !== null) {
+                clearTimeout(timer);
+                timer = null;
+            }
+
+            if (count > 1) {
+                count = 1;
+            }
+            
+            for (let i = 1; i <= len; i++) {
+                    document.getElementById('n' + i).classList.remove('on');
+                }
+        }
+
+        const clearLast = () => {
+            if (count > 1) {
+                previous = count - 1
+                document.getElementById('n' + previous).classList.remove('on'); 
+            }
+        }
+
+        const animate = () => {
+            if (count <= len) {
+                clearLast();
+                document.getElementById('n' + count).classList.add('on');
+                count++;
+                timer = setTimeout(animate, 100);
+            }
+        }
+
+        const move = () => {
+            if (timer === null) {
+                clearAll();
+                animate();
+            }
+        }
+
+        const stop = () => {
+            clearTimeout(timer);
+            timer = null;
+        }
+
+        const resume = () => {
+            if (timer === null && count > 1) {
+                animate();
+            }
+        }
     </script>
 </body>
 </html>
