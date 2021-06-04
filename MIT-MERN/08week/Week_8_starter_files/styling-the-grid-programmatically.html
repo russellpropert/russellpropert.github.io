@@ -4,7 +4,7 @@
     <title>Grid</title>
     <style>
         .on{
-            background: orange;
+            background: #6080FF;
         }
         .content{
             display: grid;
@@ -22,7 +22,8 @@
 </head>
 <body>
     <button onclick="move()">MOVE</button>
-    <main class="content">
+    <button onclick="startOver()">CLEAR</button>
+    <main id="content" class="content">
         <div id="s1">1</div>
         <div id="s2">2</div>
         <div id="s3">3</div>
@@ -37,7 +38,32 @@
         <div id="s12">12</div>  
     </main>
     <script>
-        
+        const len = document.getElementById('content').childElementCount;
+        let count = 1;
+        let timer = null;
+
+        const colorTile = () => {
+            if (count <= len) {
+                document.getElementById('s' + count).classList.add('on');
+                console.log(count);
+                count++;
+                timer = setTimeout(colorTile, 500);
+            }
+        }
+
+        const move = () => {
+            colorTile();
+        }
+
+        const startOver = () => {
+            clearTimeout(timer);
+            count = 1;
+            for (let i = 1; i <= 12; i++) {
+                document.getElementById('s' + i).classList.remove('on');
+                console.log(i);
+            }
+        }
+
     </script>
 </body>
 </html>
