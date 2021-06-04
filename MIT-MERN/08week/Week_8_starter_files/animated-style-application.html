@@ -3,20 +3,25 @@
 <head>
     <title>Grid</title>
     <style>
-        .on{
+        .on {
             background: red;
         }        
-        .content{
+        .content {
             display: grid;
             grid-template-columns: repeat(10,1fr);
             grid-template-rows: repeat(10,1fr);
             gap: 5px;
         }
-        div{
+        div {
             padding: 10px;
             text-align: center;
             border-style: solid;
             font-size: 1em;
+        }
+
+        button {
+            margin-bottom: 10px;
+            margin-left: 2px;
         }
     </style>
 </head>
@@ -144,8 +149,8 @@
             }
             
             for (let i = 1; i <= len; i++) {
-                    document.getElementById('n' + i).classList.remove('on');
-                }
+                document.getElementById('n' + i).classList.remove('on');
+            }
         }
 
         const clearLast = () => {
