@@ -52,13 +52,16 @@
         }
 
         const move = () => {
-            colorTile();
+            if (timer === null) {
+                colorTile();
+            }
         }
 
         const startOver = () => {
             clearTimeout(timer);
             count = 1;
-            for (let i = 1; i <= 12; i++) {
+            timer = null;
+            for (let i = 1; i <= len; i++) {
                 document.getElementById('s' + i).classList.remove('on');
                 console.log(i);
             }
