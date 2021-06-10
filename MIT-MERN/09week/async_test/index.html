@@ -17,12 +17,14 @@
         image = document.createElement('img');
         image.src = objectURL;
         document.body.appendChild(image);
+        return image;
+      }).then((image) => {
+        console.log ('All done! ' + image.src + ' displayed.');
       }).catch((error) => {
         console.log('There has been a problem with your fetch operation: ' + error.message);
       });
 
       console.log ('All done!');
-      //console.log ('All done! ' + image.src + 'displayed.');
     </script>
   </body>
 </html>
