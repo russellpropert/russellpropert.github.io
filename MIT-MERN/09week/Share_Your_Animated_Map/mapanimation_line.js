@@ -1,5 +1,7 @@
 //  https://open-notify-api.readthedocs.io/en/latest/iss_location.html
 
+//  https://docs.mapbox.com/mapbox-gl-js/example/live-update-feature/
+
 mapboxgl.accessToken = 'pk.eyJ1IjoicnVzc2VsbHByb3BlcnQiLCJhIjoiY2twcmN6aHNoMDBycjJ2bzRkY2tzYXc0bSJ9.FtaHBAoVWf0xfdn8wAu6mw';
 
 let coordinates = []
