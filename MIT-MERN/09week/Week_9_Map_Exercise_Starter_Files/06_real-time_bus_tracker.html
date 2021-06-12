@@ -41,18 +41,23 @@
 		const run = (data) => {
 			data = data.data;
 			console.log(new Date());
-				for (let i = 0; i < data.length; i++) {
+			console.log(data);
+			console.log(marker);
+
+				for (let i = 0; i < data.length && i <= marker.length; i++) {
 					if (!marker[i]) {
 						marker[i] = new mapboxgl.Marker()
 							.setLngLat([data[i].attributes.longitude, data[i].attributes.latitude])
 							.addTo(map);
+					} else if (i >= data.length) {
+						marker[i].remove();
+						marker.splice(1,1);
 					} else {
 						marker[i].setLngLat([data[i].attributes.longitude, data[i].attributes.latitude]);
 					}
 				}
 
 
-			console.log(marker);
 			setTimeout(() => {getBuses().then((data) => run(data))}, 15000);
 		}
 		
