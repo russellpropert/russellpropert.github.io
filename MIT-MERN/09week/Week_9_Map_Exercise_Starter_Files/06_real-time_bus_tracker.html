@@ -4,11 +4,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>MBTA Bus Tracker</title>
+	<title>MBTA Bus Tracker</title> -->
 	<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js'></script>
   <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css' rel='stylesheet' />
 	<style>
-    body {
+  	body {
 			margin: 0;
 			padding: 0;
 		}
@@ -27,40 +27,43 @@
 	<div id="map"></div>
 
 	<script>
-
 		mapboxgl.accessToken = 'pk.eyJ1IjoicnVzc2VsbHByb3BlcnQiLCJhIjoiY2twcmN6aHNoMDBycjJ2bzRkY2tzYXc0bSJ9.FtaHBAoVWf0xfdn8wAu6mw';
+
+		const marker = [];
 
 		const map = new mapboxgl.Map({
 			container: 'map',
 			style: 'mapbox://styles/mapbox/streets-v11',
-			center: [-71.104081, 42.365554],
-			zoom: 14
+			center: [-71.096081, 42.352554],
+			zoom: 13
 		});
 
-		async function run(){
-				// get bus data    
-			const locations = await getBusLocations();
+		const run = (data) => {
+			data = data.data;
 			console.log(new Date());
-			console.log(locations);
+				for (let i = 0; i < data.length; i++) {
+					if (!marker[i]) {
+						marker[i] = new mapboxgl.Marker()
+							.setLngLat([data[i].attributes.longitude, data[i].attributes.latitude])
+							.addTo(map);
+					} else {
+						marker[i].setLngLat([data[i].attributes.longitude, data[i].attributes.latitude]);
+					}
+				}
 
-			const marker = new mapboxgl.Marker()
-  	  	.setLngLat([-71.09266480802015, 42.35773408361874])
-	  	  .addTo(map);
 
-		
-			// timer
-			setTimeout(run, 15000);
+			console.log(marker);
+			setTimeout(() => {getBuses().then((data) => run(data))}, 15000);
 		}
 		
-		// Request bus data from MBTA
-		async function getBusLocations(){
+		async function getBuses(){
 			const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
 			const response = await fetch(url);
-			const json     = await response.json();
-			return json.data;
+			const data     = await response.json();
+			return data;
 		}
 		
-		run();
+		getBuses().then((data) => run(data));
 		
 	</script>
 
