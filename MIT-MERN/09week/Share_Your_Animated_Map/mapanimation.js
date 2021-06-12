@@ -25,16 +25,3 @@ async function getIssLocation() {
 
 getIssLocation();
 setInterval(getIssLocation, 20000);
-
-
-
-// let counter = 0;
-// function move() {
-//     setTimeout(() => {
-//       if (counter >= busStops.length) return;
-//       marker.setLngLat(busStops[counter]);
-//       counter++;
-//       move();
-//     }, 1000)
-// }
-
