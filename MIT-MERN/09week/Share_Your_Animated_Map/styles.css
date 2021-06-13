@@ -1,11 +1,45 @@
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
+  background: skyblue;
+}
+
+.header {
+  text-align: center;
+
+}
+
+h1 {
+  margin: 0px;
+  font-family: 'Zen Dots', Arial, Helvetica, sans-serif;
+}
+
+div[class|=line] {
+  position: absolute;
+  top: 20px;
+  background: blue;
+  width: 38%;
+  height: 2px;
+}
+
+.line-left {
+  left: 0;
+}
+
+.line-right {
+  right: 0;
+}
+
+h2 {
+  margin: 0px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-style: normal;
+  font-size: 24px
 }
 
 #map {
   position: absolute;
-  top: 0;
-  bottom: 0;
+  top: 80px;
+  bottom: 0px;
   width: 100%;
 }
