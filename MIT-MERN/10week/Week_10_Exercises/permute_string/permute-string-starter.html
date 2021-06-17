@@ -44,9 +44,8 @@
     }
 
     let tag = document.getElementsByClassName("box");
-    let len = tag.length;
 
-    for (let i = 0; i < len; i++) {
+    for (let i = 0; i < tag.length; i++) {
       tagArray[i] = tag.item(i); // get a handle on divs
       console.log(tag.item(i).innerText);
     }
