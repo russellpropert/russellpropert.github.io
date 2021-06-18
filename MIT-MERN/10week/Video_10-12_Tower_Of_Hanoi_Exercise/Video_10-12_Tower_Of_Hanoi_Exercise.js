@@ -16,6 +16,6 @@ const moveDisks = (nDisk, from, spare, to) => {
   }
 }
 
-disks = 10;
+disks = 8;
 
 moveDisks(disks, 'A', 'B', 'C');
