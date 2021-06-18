@@ -1,48 +1,77 @@
-const matrix = [
-  [1,2,3,4,5],
-  [6,7,8,9,10],
-  [11,12,13,14,15],
-  [16,17,18,19,20],
-  [21,22,23,24,25]
-];
-const rotateMatrix =[];
+let matrix = []
 
-for (let y = 0; y < matrix.length; y++) {
-  rotateMatrix.push([]);
-}
-
-
-const swap = (x, y) => {
-  rotateMatrix[x][y] = matrix[y][x];
-  rotateMatrix[y][x] = matrix[x][y];
-}
-
-for (let x = 0; x < matrix[0].length; x++) {
-  for (let y = 0; y < matrix.length; y++) {
-    swap(x, y);
+const createMatrix = (columns) => {
+  matrix = [];
+  console.log(columns);
+  let number = 1;
+  for (let y = 0; y < columns; y++) {
+    matrix.push([]);
+    for (let x = 0; x < columns; x++) {
+      matrix[y][x] = number;
+      number++;
+    }
   }
+  console.log(matrix);
+  createGrid();
+}
 
+const createGrid = () => {
+  const gridClass = document.querySelector('.grid');
+  gridClass.style.gridTemplateColumns = `repeat(${matrix[0].length}, 60px)`;
+  gridClass.style.gridTemplateRows = `repeat(${matrix.length}, 60px)`;
+
+  const gridContainer = document.getElementById('grid');
+  gridContainer.innerHTML = '';
+  for (let x = 0; x < matrix[0].length; x++) {
+    for (let y = 0; y < matrix.length; y++) {
+      let div = document.createElement('div');
+      div.classList.add('box');
+      div.setAttribute('id', `x${x}y${y}`);
+      gridContainer.append(div);
+      div.innerText = matrix[x][y];
+    }
+  }
+}
+
+const updateGrid = () => {
+  for (let x = 0; x < matrix[0].length; x++) {
+    for (let y = 0; y < matrix.length; y++) {
+      const number = matrix[x][y];
+      const gridBox = document.getElementById(`x${x}y${y}`);
+      gridBox.innerText = number;
+    }
+  }
+}
+
+const swap = () => {
+  let temp = 0;
+  for (let x = 0; x < matrix[0].length - 1; x++) {
+    for (let y = x + 1; y < matrix.length; y++) {
+      temp = matrix[y][x]
+      matrix[y][x] = matrix[x][y];
+      matrix[x][y] = temp;
+    }
+  }
 }
 
 const exchangeCols = (i) => {
   let leftCol = i;
-  let rightCol = rotateMatrix[0].length - i - 1;
+  let rightCol = matrix[0].length - i - 1;
   if (leftCol >= rightCol) return;
-  for (let y = 0; y < rotateMatrix.length; y++) {
-    const tempCol = rotateMatrix[y][leftCol];
-    rotateMatrix[y][leftCol] = rotateMatrix[y][rightCol];
-    rotateMatrix[y][rightCol] = tempCol;
+  for (let y = 0; y < matrix.length; y++) {
+    const tempCol = matrix[y][leftCol];
+    matrix[y][leftCol] = matrix[y][rightCol];
+    matrix[y][rightCol] = tempCol;
   }
   i++;
   exchangeCols(i);
 }
 
-exchangeCols(0);
-
-for (let i = 0; i < matrix.length; i++) {
-  console.log(JSON.stringify(matrix[i]));
-}
-
-for (let i = 0; i < matrix.length; i++) {
-console.log(JSON.stringify(rotateMatrix[i]));
+const rotate = () => {
+  swap();
+  exchangeCols(0);
+  updateGrid();
+  // for (let i = 0; i < matrix.length; i++) {
+  //   console.log(JSON.stringify(matrix[i]));
+  // }
 }
