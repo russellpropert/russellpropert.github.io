@@ -24,7 +24,7 @@ const createGrid = () => {
   gridContainer.innerHTML = '';
   for (let x = 0; x < matrix[0].length; x++) {
     for (let y = 0; y < matrix.length; y++) {
-      let div = document.createElement('div');
+      const div = document.createElement('div');
       div.classList.add('box');
       div.setAttribute('id', `x${x}y${y}`);
       gridContainer.append(div);
