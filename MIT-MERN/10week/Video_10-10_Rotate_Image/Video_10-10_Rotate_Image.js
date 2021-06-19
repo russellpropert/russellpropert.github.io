@@ -37,6 +37,8 @@ const createGrid = (columns) => {
     errorMessage('Choose a number from 2 to 20.', gridContainer);
   } else if (columns === '0') {
     errorMessage('No columns is not an option.', gridContainer);
+  } else if (columns === '-0') {
+    errorMessage('Seriously?', gridContainer);
   } else if (columns < 0) {
     errorMessage('That\'s not possible.', gridContainer);
   } else if (isNaN(parseFloat(columns))) {
