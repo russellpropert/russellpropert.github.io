@@ -33,10 +33,13 @@ const createGrid = (columns) => {
   const gridContainer = document.getElementById('grid');
   gridContainer.innerHTML = '';
 
+  const searchLeters = /[^0-9]/g;
   if (columns == '') {
     errorMessage('Choose a number from 2 to 20.', gridContainer);
   } else if (columns === '0') {
     errorMessage('No columns is not an option.', gridContainer);
+  } else if (columns === '1') {
+    errorMessage('Really? That\'s not going to be much fun.', gridContainer);
   } else if (columns === '-0') {
     errorMessage('Seriously?', gridContainer);
   } else if (columns < 0) {
@@ -45,8 +48,8 @@ const createGrid = (columns) => {
     errorMessage('Number please.', gridContainer);
   } else if (!Number.isInteger(parseFloat(columns))) {
     errorMessage('Whole number please.', gridContainer);
-  } else if (columns < 2) {
-    errorMessage('Really? That\'s not going to be much fun.', gridContainer);
+  } else if (searchLeters.test(columns)) {
+    errorMessage('Just a number.', gridContainer);
   } else if (columns > 20) {
     errorMessage('How about something between 2 and 20?', gridContainer);
   } else {
