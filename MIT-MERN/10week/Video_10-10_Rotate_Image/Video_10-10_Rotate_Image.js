@@ -15,28 +15,57 @@ const createMatrix = (columns) => {
       number++;
     }
   }
-  createGrid();
 }
 
-const createGrid = () => {
+const errorMessage = (text, gridContainer) => {
+  const p = document.createElement('p')
+  const textNode = document.createTextNode(text);
+  p.appendChild(textNode);
+  console.log(textNode);
+  gridContainer.appendChild(p);
+}
+
+const createGrid = (columns) => {
   const gridClass = document.querySelector('.grid');
-  gridClass.style.gridTemplateColumns = `repeat(${matrix[0].length}, 60px)`;
-  gridClass.style.gridTemplateRows = `repeat(${matrix.length}, 60px)`;
+  gridClass.style.gridTemplateColumns = '1fr';
+  gridClass.style.gridTemplateRows = 'ifr';
 
   const gridContainer = document.getElementById('grid');
   gridContainer.innerHTML = '';
-  numberOfBoxes = matrix[0].length * matrix.length - 1;
-  colorIncrement = maxHue / numberOfBoxes;
 
-  for (let x = 0; x < matrix[0].length; x++) {
-    for (let y = 0; y < matrix.length; y++) {
-      const div = document.createElement('div');
-      div.classList.add('box');
-      div.setAttribute('id', `x${x}y${y}`);
-      gridContainer.append(div);
-      div.innerText = matrix[x][y];
-      const hue = ((matrix[x][y] - 1) * colorIncrement);
-      div.style.background = `hsl(${Math.ceil(hue)}, ${saturation}, ${lightness})`;
+  if (columns == '') {
+    errorMessage('Choose a number from 2 to 20.', gridContainer);
+  } else if (columns === '0') {
+    errorMessage('No columns is not an option.', gridContainer);
+  } else if (columns < 0) {
+    errorMessage('That\'s not possible.', gridContainer);
+  } else if (isNaN(parseFloat(columns))) {
+    errorMessage('Number please.', gridContainer);
+  } else if (!Number.isInteger(parseFloat(columns))) {
+    errorMessage('Whole number please.', gridContainer);
+  } else if (columns < 2) {
+    errorMessage('Really? That\'s not going to be much fun.', gridContainer);
+  } else if (columns > 20) {
+    errorMessage('How about something between 2 and 20?', gridContainer);
+  } else {
+    createMatrix(columns);
+
+    gridClass.style.gridTemplateColumns = `repeat(${matrix[0].length}, 60px)`;
+    gridClass.style.gridTemplateRows = `repeat(${matrix.length}, 60px)`;
+
+    numberOfBoxes = matrix[0].length * matrix.length - 1;
+    colorIncrement = maxHue / numberOfBoxes;
+
+    for (let x = 0; x < matrix[0].length; x++) {
+      for (let y = 0; y < matrix.length; y++) {
+        const div = document.createElement('div');
+        div.classList.add('box');
+        div.setAttribute('id', `x${x}y${y}`);
+        gridContainer.append(div);
+        div.innerText = matrix[x][y];
+        const hue = ((matrix[x][y] - 1) * colorIncrement);
+        div.style.background = `hsl(${Math.ceil(hue)}, ${saturation}, ${lightness})`;
+      }
     }
   }
 }
