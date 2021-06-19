@@ -1,8 +1,12 @@
 let matrix = []
+let numberOfBoxes = 0;
+const maxHue = 320;
+let colorIncrement = 0;
+const saturation = '90%';
+const lightness = '75%';
 
 const createMatrix = (columns) => {
   matrix = [];
-  console.log(columns);
   let number = 1;
   for (let y = 0; y < columns; y++) {
     matrix.push([]);
@@ -11,7 +15,6 @@ const createMatrix = (columns) => {
       number++;
     }
   }
-  console.log(matrix);
   createGrid();
 }
 
@@ -22,6 +25,9 @@ const createGrid = () => {
 
   const gridContainer = document.getElementById('grid');
   gridContainer.innerHTML = '';
+  numberOfBoxes = matrix[0].length * matrix.length - 1;
+  colorIncrement = maxHue / numberOfBoxes;
+
   for (let x = 0; x < matrix[0].length; x++) {
     for (let y = 0; y < matrix.length; y++) {
       const div = document.createElement('div');
@@ -29,6 +35,8 @@ const createGrid = () => {
       div.setAttribute('id', `x${x}y${y}`);
       gridContainer.append(div);
       div.innerText = matrix[x][y];
+      const hue = ((matrix[x][y] - 1) * colorIncrement);
+      div.style.background = `hsl(${Math.ceil(hue)}, ${saturation}, ${lightness})`;
     }
   }
 }
@@ -39,6 +47,8 @@ const updateGrid = () => {
       const number = matrix[x][y];
       const gridBox = document.getElementById(`x${x}y${y}`);
       gridBox.innerText = number;
+      const hue = ((matrix[x][y] - 1) * colorIncrement);
+      gridBox.style.background = `hsl(${Math.ceil(hue)}, ${saturation}, ${lightness})`;
     }
   }
 }
