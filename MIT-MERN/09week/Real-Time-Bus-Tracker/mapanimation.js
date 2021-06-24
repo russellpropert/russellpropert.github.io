@@ -14,15 +14,16 @@ const run = (data) => {
   console.log(new Date());
   console.log(data);
   console.log(marker);
+  const len = Math.max(data.length, marker.length);
 
-    for (let i = 0; i < data.length && i <= marker.length; i++) {
+    for (let i = 0; i < len; i++) {
       if (!marker[i]) {
         marker[i] = new mapboxgl.Marker()
           .setLngLat([data[i].attributes.longitude, data[i].attributes.latitude])
           .addTo(map);
       } else if (i >= data.length) {
         marker[i].remove();
-        marker.splice(1,1);
+        marker.pop();
       } else {
         marker[i].setLngLat([data[i].attributes.longitude, data[i].attributes.latitude]);
       }
