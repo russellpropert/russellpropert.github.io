@@ -1,0 +1,12 @@
+<script>
+  function multiply(a = 0, b = 1) {
+    // if (!a) a = 0; //same as above
+    // if (!b) b = 1; //same as above
+    return a * b;
+  }
+  console.log(multiply(5, 4)); //20
+  console.log(multiply(undefined)); //0
+  console.log(multiply(5,undefined)); //5
+  console.log(multiply(5, null)); //null will give a 0 value
+  console.log(multiply(5,NaN)); //NaN is a value. This calculation returns NaN.
+</script>
