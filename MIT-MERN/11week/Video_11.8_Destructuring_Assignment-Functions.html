@@ -1,0 +1,20 @@
+<script>
+  function f() {
+    return [1, 2, 3, 4];
+  }
+  const [a, b] = f();
+  console.log(a);
+  console.log(b);
+
+  const user = {
+    id: 209,
+    firstName: 'Peter',
+    lastName: 'Parker',
+    age: 19
+  };
+
+  function userId({age, firstName}) {
+    return `${firstName} is ${age}`;
+  }
+  console.log(userId(user));
+</script>
