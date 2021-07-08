@@ -1,0 +1,36 @@
+<style>
+  body {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    align-content: initial;
+    /* border-style: solid; */
+
+  }
+
+  div {
+    display: block;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #C0C4D0;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, .5);
+    font-size: 2em;
+  }
+</style>
+<body>
+  <div id="output"></div>
+  <script>
+    let numbers = [0, 1, 2, 3, 4, 5];
+    // passed by reference
+    let mycopy1 = numbers;
+    // not passed by reference
+    let mycopy2 = [...numbers];
+    mycopy1[2] = 9;
+
+    //screen output
+    document.getElementById('output').innerHTML = `numbers: ${numbers}<br>mycopy1: ${mycopy1}<br>`;
+    document.getElementById('output').innerHTML += `mycopy2: ${mycopy2}<br>`;
+
+  </script>
+</body>
