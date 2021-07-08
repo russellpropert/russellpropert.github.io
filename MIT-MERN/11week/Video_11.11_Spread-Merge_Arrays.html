@@ -1,17 +1,15 @@
 <style>
   body {
     display: flex;
-    padding: 0px;
+    padding: 20px;
     margin: 0px;
-    width: 100%;
-    align-content: initial;
+    align-items: flex-start;
+    justify-content: center;
     /* border-style: solid; */
 
   }
 
   div {
-    display: block;
-    margin: 20px auto;
     padding: 20px;
     background-color: #C0C4D0;
     box-shadow: inset 0px 0px 10px rgba(0, 0, 0, .5);
@@ -30,11 +28,22 @@
     let newList3 = [...l1,...l2];
     newList1[0][1] = 8;
 
+    //Building Blocks Of Destructuring Discussion
+    const student = { 
+        id: 183294,  
+        firstName: "Peter", 
+        lastName: "Parker", 
+        age: 19 
+      }
+    
+    const extractStudentName = ({id, age, ... student}) => student;
+    const studentName = extractStudentName(student);
+
     //screen output
     document.getElementById('output').innerHTML = `l1: ${JSON.stringify(l1)}<br>`;
     document.getElementById('output').innerHTML += `newList1: ${JSON.stringify(newList1)}<br>`;
     document.getElementById('output').innerHTML += `newList2: ${JSON.stringify(newList2)}<br>`;
-    document.getElementById('output').innerHTML += `newList3: ${JSON.stringify(newList3)}<br>`;
-
+    document.getElementById('output').innerHTML += `studentName: ${JSON.stringify(studentName)}<br>`;
+    
   </script>
 </body>
