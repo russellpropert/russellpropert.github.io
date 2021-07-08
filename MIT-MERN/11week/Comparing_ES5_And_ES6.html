@@ -3,11 +3,11 @@
     this.state = state;
   }
 
-  const mistake = cup1('full');
-  console.log(window.state); //'this' becomes the global object 'window'
+  const mistake = cup1('full'); //'this' becomes the global object 'window'
+  console.log(window.state); //outputs 'full'
 
   const firstCup = new cup1('full');
-  console.log(firstCup.state);
+  console.log(firstCup.state); //outputs 'full'
 
   class cup2 {
     constructor(state) {
@@ -16,6 +16,6 @@
   }
 
   const secondCup = new cup2('overflowing');
-  console.log(secondCup.state);
+  console.log(secondCup.state); //outputs 'overflowing'
 
 </script>
