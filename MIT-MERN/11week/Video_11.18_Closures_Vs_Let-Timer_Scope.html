@@ -1,0 +1,48 @@
+<style>
+  body {
+    display: flex;
+    padding: 20px;
+    margin: 0px;
+    align-items: flex-start;
+    justify-content: center;
+    /* border-style: solid; */
+
+  }
+
+  div {
+    padding: 20px;
+    background-color: #B0A4D0;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .25);
+    border-style: solid;
+    border-width: 1px;
+    font-size: 2em;
+  }
+</style>
+<body>
+
+  <div id="output"></div>
+
+  <script>
+    for (var i = 1; i < 10; i++) {
+      setTimeout(() => {
+        document.getElementById('output').innerHTML += `Loop with timer: ${i}<br>`;
+      }, 1000);
+    }
+
+    for (var i = 0; i < 10; i++) {
+      ((x) => {
+        setTimeout(() => {
+        document.getElementById('output').innerHTML += `Closure: ${x}<br>`;
+      }, 1000);
+      })(i);
+    }
+
+    for (let i = 1; i < 10; i++) {
+      setTimeout(() => {
+        document.getElementById('output').innerHTML += `Block scope: ${i}<br>`;
+      }, 1000);
+    }
+
+    
+  </script>
+</body>
