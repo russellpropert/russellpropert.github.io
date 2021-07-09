@@ -1,0 +1,44 @@
+<style>
+  body {
+    display: flex;
+    padding: 20px;
+    margin: 0px;
+    align-items: flex-start;
+    justify-content: center;
+    /* border-style: solid; */
+
+  }
+
+  div {
+    padding: 20px;
+    background-color: #C0C4D0;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, .5);
+    font-size: 2em;
+  }
+</style>
+<body>
+
+  <div id="output"></div>
+
+  <script>
+    function greeting1() {
+      return 'hello';
+    }
+
+    const greeting2 = () => 'hello again';
+
+    // with paramaters
+    const add = (a,b) => a + b;
+
+    //callback
+    const numbers = ['one','two','three'];
+    const output = numbers.map(label => label.length);
+
+    //screen output
+    document.getElementById('output').innerHTML = `greeting 1: ${greeting1()}<br>`;
+    document.getElementById('output').innerHTML += `greeting 2: ${greeting2()}<br>`;
+    document.getElementById('output').innerHTML += `add function: ${add(23, 19)}<br>`;
+    document.getElementById('output').innerHTML += `map: ${output}<br>`;
+    
+  </script>
+</body>
