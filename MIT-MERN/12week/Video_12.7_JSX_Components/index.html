@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JSX Render Element Intro</title>
+
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const Hello = (a) => {
+      return (<h1>Hello {a.name} of the {a.place}.</h1>);
+    };
+    ReactDOM.render(<Hello name="Nausicaä" place="Valley of the Wind" />, document.getElementById('root'));
+  </script>
+  
+  <!-- <script src="element.jsx" type="text/babel"></script> -->
+</body>
+</html>
