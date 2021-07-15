@@ -4,7 +4,7 @@ const Hello = (a) => {
 };
 
 const getRandomColor = () => {
-  const palet = ["red", "green", "blue"];
+  const palet = ["red", "purple", "blue"];
   let color = palet[Math.floor(Math.random() * 3)];
   console.log(color);
   return color;
