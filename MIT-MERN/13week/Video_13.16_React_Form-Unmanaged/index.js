@@ -1,6 +1,6 @@
 let results = 'None';
 
-const handle = (event) => {
+const handle = () => {
   let year = document.getElementById('year').value;
   let name = document.getElementById('name').value;
   let email = document.getElementById('email').value;
@@ -20,6 +20,8 @@ const handle = (event) => {
     <SignUp/>,
     document.getElementById('root')
   );
+
+  console.log(document.getElementById('year'));
 }
 
 const SignUp = () => {  
