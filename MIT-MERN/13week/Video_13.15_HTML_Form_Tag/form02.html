@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form 2</title>
+</head>
+<body>
+  <form id="form">
+    <!-- Dropdown select menu -->
+    <select id="certificate">
+      <option>Single Engine Land</option>
+      <option>Multi Engine Land</option>
+      <option>Single Engine Sea</option>
+      <option>Multi Engine Sea</option>
+    </select>
+
+    <!-- Text input -->
+    <div>First Name</div>
+    <input type="text" id="firstName">
+
+    <!-- Text input -->
+    <div>Last Name</div>
+    <input type="text" id="lastName">
+
+    <!-- Text input -->
+    <div>Tail Number</div>
+    <input type="text" id="tailNumber">
+
+    <!-- Number input -->
+    <div>Number of endorsements</div>
+    <input type="number" id="endorsements">
+
+    <!-- Checkbox -->
+    <div>
+      <input type="checkbox" id="checkbox"> Tailwheel endorsement
+    </div>
+    
+    <!-- Submit button -->
+    <button onclick="handler(event)">Submit</button>
+  </form>
+
+  <script>
+    const handler = (e) => {
+      console.log(e.target.form.elements);
+      console.log(e.target.form.elements.certificate.value);
+      console.log(e.target.form.elements.firstName.value);
+      console.log(e.target.form.elements.lastName.value);
+      console.log(e.target.form.elements.tailNumber.value);
+      console.log(e.target.form.elements.endorsements.value);
+      console.log(e.target.form.elements.checkbox.checked);
+      event.preventDefault();
+    }
+  </script>
+
+</body>
+</html>
