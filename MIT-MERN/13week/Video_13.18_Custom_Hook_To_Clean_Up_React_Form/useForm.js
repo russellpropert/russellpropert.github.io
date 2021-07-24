@@ -7,7 +7,7 @@ const useForm = (initialValues) => {
     
       if(e.type === 'change') {
         let value;
-        if (e.target.checked === undefined) {
+        if (e.target.name !== 'remember') {
           value = e.target.value;
         } else {
           value = e.target.checked;
