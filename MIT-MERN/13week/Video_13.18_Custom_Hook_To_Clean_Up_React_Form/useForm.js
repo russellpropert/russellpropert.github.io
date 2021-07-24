@@ -16,7 +16,6 @@ const useForm = (initialValues) => {
           ...values,
           [e.target.name]: value
         })
-        console.log(e.target.checked);
       }
     }
   ];
