@@ -8,7 +8,7 @@ const NavBar = ({menuItems}) => {
   return <ul style={{listStyleType: "none"}}>{updatedList}</ul>
 }
 
-const menuItems = [1, 2, 3, , 4, 5];
+const menuItems = [1, 2, 3, 4, 5];
 
 ReactDOM.render(
   <NavBar menuItems={menuItems} />,
