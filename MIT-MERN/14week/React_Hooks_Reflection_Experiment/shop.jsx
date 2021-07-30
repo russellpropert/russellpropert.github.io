@@ -24,8 +24,7 @@ function ShoppingCart({ availableItems }) {
   };
 
   const toggleCart = () => {
-    const newShowCart = !showCart;
-    setShowCart(newShowCart);
+    setShowCart(!showCart);
   }
 
   // No need to update code beyond this point
