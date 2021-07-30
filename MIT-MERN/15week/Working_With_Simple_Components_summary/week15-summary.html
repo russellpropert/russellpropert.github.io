@@ -1,0 +1,172 @@
+
+
+<html>
+
+<head>
+    <title>Working with Simple Components</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="proxima-nova-web-fonts-master/fonts/fonts.css" />
+</head>
+
+<body>
+    <div class="container">
+        <img src="mitxprologo.jpg" alt="MIT XPro Logo" width="250px" height="80px">
+        <h1 class="header-text">Working With Simple Components</h1>
+    </div>
+    <p>Please review the concepts covered this week.</p>
+
+
+<h2 id="converting-html-to-react-components">Converting HTML To React Components</h2>
+<h3 id="simple-state-management-in-html">Simple state management in HTML</h3>
+<p>This week, you saw Dr. Williams take simple HTML and JavaScript, and turn those into React components through using an ATM example. Let's start reviewing what he did by first examining the basic HTML code that you started with: </p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>ATM example<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"label-huge"</span>&gt;</span>
+    Deposit:
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">onchange</span>=<span class="hljs-string">"HandleChange(value)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"handleSubmit()"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"total"</span>&gt;</span>Account balance: $0<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+</code></pre>
+<p>Here's the JavaScript files that you started out with: </p>
+<pre><code class="lang-js">
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">let</span> transactionState = <span class="hljs-number">0</span>; <span class="hljs-comment">//how much money you are withdrawing/depositing</span>
+    <span class="hljs-keyword">let</span> totalState = <span class="hljs-number">0</span>; <span class="hljs-comment">//how much money is in the account</span>
+    <span class="hljs-keyword">let</span> status = <span class="hljs-string">"Account Balance : "</span>; <span class="hljs-comment">//the status of the account</span>
+
+    <span class="hljs-comment">//this code updates the state of transactionState by pulling in the number input</span>
+    <span class="hljs-keyword">const</span> handleChange = <span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`handle change <span class="hljs-subst">${value}</span>`</span>);
+        transactionState = <span class="hljs-built_in">Number</span>(value);
+    }
+
+    <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        totalState += transactionState;
+        status = <span class="hljs-string">`Account Balance: $ <span class="hljs-subst">${totalState}</span>`</span>;
+        <span class="hljs-comment">//write the state into DOM</span>
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"total"</span>).innerHTML = status;
+    };
+
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p>Note that you can still manage state with just plain JavaScript!  The state of the transaction is managed with the variable transactionState, and the state of the 
+  total balance of the account is managed with totalState. Now, take a look at how this basic HTML and JavaScript is converted to React.</p>
+<h3 id="converting-the-html-to-react">Converting HTML to React</h3>
+
+<p>The first stage of converting the HTML code to React is by creating a functional component that handles the ATM deposits. </p>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> ATMDeposit = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">let</span> transactionState = <span class="hljs-number">0</span>; 
+    <span class="hljs-keyword">let</span> totalState = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> status = <span class="hljs-string">"Account balance $0"</span>;
+    <span class="hljs-keyword">const</span> handleChange = <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`handleChange $event.target.value}`</span>);
+        transactionState = <span class="hljs-built_in">Number</span>(event.target.value);
+    };
+
+    <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+        totalState += transactionState;
+        status = <span class="hljs-string">`Account Balance: $ <span class="hljs-subst">${totalState}</span>`</span>;
+        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"total"</span>).innerHTML = status;
+        event.preventDefault();
+    };
+
+    <span class="hljs-keyword">return</span> (
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">className</span> = <span class="hljs-string">"label huge"</span>&gt;</span>
+          Deposit:
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">"number"</span> <span class="hljs-attr">onChange</span> = <span class="hljs-string">{handleChange}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span> = <span class="hljs-string">"submit"</span> <span class="hljs-attr">value</span> = <span class="hljs-string">"submit"</span> <span class="hljs-attr">onClick</span> = <span class="hljs-string">{handleSubmit}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"total"</span>&gt;</span>}status<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></span>
+
+    )
+}
+
+reactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ATMDeposit</span> /&gt;</span>, document.getElementById("root"))</span>
+</code></pre>
+<p>Note that this looks very similar to the HTML and JavaScript you used before. It has the same functionality but has been converted to React code. However, it's a very large component that does many different things at the same time, so it's best to dry up the code by separating the concerns (i.e., functionality) into different components. </p>
+<h3 id="separating-into-different-components">Separating into Different Components</h3>
+<p>Now, you can take a look at how Dr. Williams breaks up his React components into two separate components that do two separate jobs.</p>
+<ul>
+<li>The first component, ATMDeposit, is the basic area to put in numbers and it has a submit button. However, it does not handle any of the functionality of what happens when you input a number. Instead, those functionalities are put into the second component, &#39;Account&#39;.</li></br>
+<li> Account sets the totals based on the deposits and withdrawals and also tracks the state of the deposits. This keeps the concerns separated into different components so that you don&#39;t have to do too many things in one component</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> ATMDeposit = <span class="hljs-function">(<span class="hljs-params">{ onChange, isDeposit }</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> choice = [<span class="hljs-string">"Deposit"</span>, <span class="hljs-string">"Cash Back"</span>];
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`ATM isDeposit: <span class="hljs-subst">${isDeposit}</span>`</span>);
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"label huge"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span> {choice[Number(!isDeposit)]}<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"number"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"200"</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">{onChange}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"200"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"Submit"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">input</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">const</span> Account = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-keyword">let</span> deposit = <span class="hljs-number">0</span>; <span class="hljs-comment">// state of this transaction</span>
+  <span class="hljs-keyword">const</span> [totalState, setTotalState] = React.useState(<span class="hljs-number">0</span>);
+  <span class="hljs-keyword">const</span> [isDeposit, setIsDeposit] = React.useState(<span class="hljs-literal">true</span>);
+
+  <span class="hljs-keyword">let</span> status = <span class="hljs-string">`Account Balance $ <span class="hljs-subst">${totalState}</span> `</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Account Rendered with isDeposit: <span class="hljs-subst">${isDeposit}</span>`</span>);
+  <span class="hljs-keyword">const</span> handleChange = <span class="hljs-function"><span class="hljs-params">event</span> =&gt;</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`handleChange <span class="hljs-subst">${event.target.value}</span>`</span>);
+    deposit = <span class="hljs-built_in">Number</span>(event.target.value);
+  };
+  <span class="hljs-keyword">const</span> handleSubmit = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">let</span> newTotal = isDeposit ? totalState + deposit : totalState - deposit;
+    setTotalState(newTotal);
+    event.preventDefault();
+  };
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">onSubmit</span>=<span class="hljs-string">{handleSubmit}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"total"</span>&gt;</span>{status}<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setIsDeposit(true)}&gt;Deposit<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> setIsDeposit(false)}&gt;Cash Back<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">ATMDeposit</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">{handleChange}</span> <span class="hljs-attr">isDeposit</span>=<span class="hljs-string">{isDeposit}</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ATMDeposit</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span>
+  );
+};
+<span class="hljs-comment">// ========================================</span>
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Account</span> /&gt;</span>, document.getElementById("root"));</span>
+</code></pre>
+
+<h2 id="fetching-data-from-urls">Fetching Data from URLs</h2>
+
+<p>You can get data using useEffect as a &quot;side effect&quot; of a re-render (or anything else you want to watch for) in your program. In this example, you can use axios to call a URL and await its incoming response. </p>
+<pre><code class="lang-js">    useEffect(() =&gt; {
+        const fetchData = aync () =&gt; {
+            setIsLoading(true)<span class="hljs-comment">;</span>
+            const result = await axios(url)<span class="hljs-comment">;</span>
+            setData(result<span class="hljs-meta">.data</span>)<span class="hljs-comment">;</span>
+            setIsLoading(false)<span class="hljs-comment">;</span>
+        }<span class="hljs-comment">;</span>
+
+        fetchData()<span class="hljs-comment">;</span>
+    }, [])<span class="hljs-comment">;</span>
+}
+</code></pre>
+
+<h2 id="tracking-changes-with-useeffect">Tracking Changes With useEffect</h2>
+<p>You can see from the above example how you can track what you want to trigger a re-render with useEffect in the second argument of what useEffect takes. 
+  The first argument is the function you want useEffect to run, but the second argument &quot;watches&quot; for whatever you&#39;d like it to watch for that will trigger the actions in the first argument. 
+  In this example, you would watch for a change in the URL, which would fire a re-fetching of data based on that URL. What are some 
+other things you could watch for?</p>
+
+<pre><code class="lang-js">    useEffect(() =&gt; {
+        const fetchData = aync () =&gt; {
+            setIsLoading(true)<span class="hljs-comment">;</span>
+            const result = await axios(url)<span class="hljs-comment">;</span>
+            setData(result<span class="hljs-meta">.data</span>)<span class="hljs-comment">;</span>
+            setIsLoading(false)<span class="hljs-comment">;</span>
+        }<span class="hljs-comment">;</span>
+
+        fetchData()<span class="hljs-comment">;</span>
+    }, [url])<span class="hljs-comment">;</span>
+}
+</code></pre>
+
+
+</body>
