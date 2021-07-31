@@ -1,8 +1,8 @@
 const ATMDeposit = ({onChange}) => {
   return (
-    <label className="label huge">
+    <label>
       Deposit:&nbsp;
-      <input type="number" onChange={onChange}></input>
+      <input type="number" id="deposit" onChange={onChange}></input>
       <input type="submit"></input>
     </label>
   );
@@ -16,18 +16,18 @@ const Account = () => {
     console.log(`handleChange ${depositAmount}`);
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = () => {
     const total = accountState + depositAmount;
     alert(`Account total = ${total}`);
     setAccountState(total);
+    document.getElementById('deposit').value = 0;
     event.preventDefault();
-
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Account Balance {accountState}</h2>
-      <ATMDeposit onChange={handleChange}>Deposit</ATMDeposit>
+      <h2>Account Balance ${accountState}</h2>
+      <ATMDeposit onChange={handleChange}></ATMDeposit>
     </form>
   );
 }
