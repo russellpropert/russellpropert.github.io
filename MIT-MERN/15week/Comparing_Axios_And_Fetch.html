@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test</title>
+</head>
+<body>
+
+<!-- 
+  Original code without the progress bar or styling: 
+  https://github.com/AnthumChris/fetch-progress-indicators/blob/master/fetch-basic/supported-browser.js
+-->
+
+<div style="
+  position: relative; 
+  margin: 5px; 
+  padding: 0; 
+  width: 200px; 
+  height: 20px; 
+  border: 1px solid black; 
+  color: #AAA; 
+  text-align: center;
+">Progress
+  <div id="progress" style="
+    position: absolute; 
+    z-index: -1; 
+    top: 0; 
+    left: 0; 
+    margin: 0; 
+    padding: 0; 
+    background-color: blue; 
+    width: 0%; 
+    height: 20px;
+  "></div>
+</div>
+
+<img id="img">
+
+<script>
+    
+  'use strict'
+
+  const element = document.getElementById('progress');
+
+  fetch('https://fetch-progress.anthum.com/30kbps/images/sunrise-baseline.jpg')
+    .then(response => {
+
+      if (!response.ok) {
+        throw Error(response.status+' '+response.statusText)
+      }
+
+      // ensure ReadableStream is supported
+      if (!response.body) {
+        throw Error('ReadableStream not yet supported in this browser.')
+      }
+
+      // store the size of the entity-body, in bytes
+      const contentLength = response.headers.get('content-length');
+
+      // ensure contentLength is available
+      if (!contentLength) {
+        throw Error('Content-Length response header unavailable');
+      }
+
+      // parse the integer into a base-10 number
+      const total = parseInt(contentLength, 10);
+
+      let loaded = 0;
+
+      return new Response(
+
+        // create and return a readable stream
+        new ReadableStream({
+          start(controller) {
+            const reader = response.body.getReader();
+
+            read();
+            function read() {
+              reader.read().then(({done, value}) => {
+                if (done) {
+                  controller.close();
+                  return; 
+                }
+                loaded += value.byteLength;
+                progress({loaded, total})
+                controller.enqueue(value);
+                read();
+              }).catch(error => {
+                console.error(error);
+                controller.error(error)                  
+              })
+            }
+          }
+        })
+      );
+    })
+    .then(response => 
+      // construct a blob from the data
+      response.blob()
+    )
+    .then(data => {
+      // insert the downloaded image into the page
+      document.getElementById('img').src = URL.createObjectURL(data);
+    })
+    .catch(error => {
+      console.error(error);
+    })
+
+  function progress({loaded, total}) {
+    element.style.width = `${Math.round(loaded/total*100)}%`;
+  }
+
+</script>
+</body>
+</html>
