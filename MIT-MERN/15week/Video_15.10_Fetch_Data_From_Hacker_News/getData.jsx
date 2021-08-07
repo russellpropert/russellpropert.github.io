@@ -15,6 +15,7 @@ function App() {
       setIsLoading(true);
       try {
         const result = await axios(url);
+        console.log(result);
         setData(result.data);
       } catch (error) {
         setIsError(true);
@@ -39,6 +40,8 @@ function App() {
       >
         Search
       </button>
+
+      {isError && <div>There was a problem retrieving the data.</div>}
 
       {isLoading ? (
         <div>Loading ...</div>
