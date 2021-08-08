@@ -1,6 +1,7 @@
-const useDataApi = (initialUrl, initialData) => {
+const useDataApi = (initialUrl, initialData, useState) => {
   console.log('useDataApi');
-  const {useState, useEffect, useReducer} = React;
+  const {useEffect, useReducer} = React;
+
   const [url, setUrl] = useState(initialUrl);
 
   const [state, dispatch] = useReducer(dataFetchReducer, {
@@ -65,18 +66,20 @@ const dataFetchReducer = (state, action) => {
 function App() {
   console.log('Render App');
   const {Fragment, useState} = React;
-  const [query, setQuery] = useState("MIT");
 
+  const numberOfHits = 55;
+  const [query, setQuery] = useState("MIT");
   const [{data, isLoading, isError}, setUrl] = useDataApi(
-    "https://hn.algolia.com/api/v1/search?query=MIT",
-    { hits: [] }
+    `https://hn.algolia.com/api/v1/search?query=${query}&hitsPerPage=${numberOfHits}`,
+    { hits: [] },
+    useState
   );
 
   return (
     <Fragment>
       <form
         onSubmit={(event) => {
-          setUrl(`https://hn.algolia.com/api/v1/search?query=${query}`)
+          setUrl(`https://hn.algolia.com/api/v1/search?query=${query}&hitsPerPage=${numberOfHits}`)
           event.preventDefault();
         }}
       >
