@@ -24,9 +24,9 @@ const range = (num) => {
     .map((item, i) => i + 1);
 }
 
-const paginate = (items, pageNumber, pageSize) => {
-  const start = (pageNumber -1) * pageSize;
-  let page = items.slice(start, start + pageSize);
+const paginate = (hits, pageNumber, pageSize) => {
+  const start = (pageNumber - 1) * pageSize;
+  let page = hits.slice(start, start + pageSize).map((hit, i) => {return {...hit, pageNumber: start + 1 + i}});
   return page;
 }
 
@@ -94,13 +94,32 @@ const dataFetchReducer = (state, action) => {
   }
 }
 
-function App() {
+const Hits = ({page}) => {
+  return (
+    <>
+      <ul className="list-group" style={{marginBottom: "20px"}}>
+        {page.map((item) => (
+          <li className="list-group-item" key={item.objectID}>
+            {item.data ?
+              <a href={item.url}>{`${item.pageNumber}. ${item.title}`}</a> :
+              <span>&nbsp;</span>
+            }
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+
+} 
+
+const App = () => {
   console.log('Render App');
   const {Fragment, useState} = React;
   const [query, setQuery] = useState("MIT");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const numberOfHits = 74;
+  const [pageSize, setPageSize] = useState(10);
+  const numberOfHits = 64;
 
   const [{isLoading, isError, data}, setUrl] = useDataApi(
     `https://hn.algolia.com/api/v1/search?query=${query}&hitsPerPage=${numberOfHits}`,
@@ -108,23 +127,30 @@ function App() {
     useState
   );
 
-  let page = data.hits;
+  let hits = data.hits;
+  let page = [];
 
   const handlePageChange = e => {
     setCurrentPage(Number(e.target.textContent));
   }
 
-  const pageSize = 10;
+  const handlePageSizeChange = e => {
+    setPageSize(Number(e.target.value));
+    setCurrentPage(1);
+  }
 
-  if (page.length >= 1) {
-    page = paginate(page, currentPage, pageSize);
+  if (hits.length >= 1) {
+    page = paginate(hits, currentPage, pageSize).map((hit) => {return {...hit, data: true}});
     console.log(`currentPage: ${currentPage}`);
   }
 
   if (page.length < pageSize) {
-    const filler = Array(pageSize - page.length).fill(0).map((item, i) => {return {objectID: i, url: '', title: ''}});
+    const filler = Array(pageSize - page.length).fill(0).map((item, i) => {return {objectID: i, url: '', title: '', data: false}});
     page = [...page, ...filler];
   }
+
+  console.log(page);
+
 
   return (
     <Fragment>
@@ -132,6 +158,7 @@ function App() {
       <form
         onSubmit={(event) => {
           setUrl(`https://hn.algolia.com/api/v1/search?query=${query}&hitsPerPage=${numberOfHits}`)
+          setCurrentPage(1);
           event.preventDefault();
         }}
       >
@@ -143,26 +170,29 @@ function App() {
         <button type="submit">Search</button>
       </form>
 
-      {isError && <div>Something went wrong ...</div>}
+      {isError && <div>The data could not retrieved.</div>}
 
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-        <ul className="list-group" style={{marginBottom: "20px"}}>
-          {page.map(item => (
-            <li className="list-group-item" key={item.objectID}>
-              <a href={item.url}>{item.title}</a><span>&nbsp;</span>
-            </li>
-          ))}
-        </ul>
+        <Hits page={page} />
       )}
 
       <Pagination
-        items={data.hits}
+        items={hits}
         pageSize={pageSize}
         onPageChange={handlePageChange}
       >
       </Pagination>
+
+      <label style={{marginRight: "10px"}}>Number of articles per page</label>
+      <select onChange={handlePageSizeChange} defaultValue="10">
+        <option>5</option>
+        <option>10</option>
+        <option>15</option>
+        <option>25</option>
+        <option>50</option>
+      </select>
     </Fragment>
   );
 }
