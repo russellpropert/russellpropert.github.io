@@ -106,7 +106,7 @@ const Aircraft = ({data, rowIndex}) => {
 const Table = ({page, Fragment}) => {
   return (
     <Fragment>
-      <table className="table" style={{fontSize: ".75em"}}>
+      <table className="table table-striped" style={{fontSize: ".75em"}}>
         <thead>
           <tr>
             <th scope="col">No.</th>
