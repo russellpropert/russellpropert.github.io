@@ -1,35 +1,30 @@
-const {useState, useEffect} = React;
+const {useState, useEffect, Fragment} = React;
 
-const Square = ({id, player, newState}) => {
-  const [status, setStatus] = useState({color: 'green', xo: ''});
-  const xoArray = ['X', 'O'];
-  const palet = ['red', 'blue', 'green'];
-  const getRandomColor = () => palet[Math.floor(Math.random() * 3)];
-
-  // useEffect(() => {
-  //   console.log(`Render ${id}`);
-  //   return () => console.log(`unmounting Square ${id}`);
-  // });
+const Mark = ({id, player, mark, color, newState, gameEnd}) => {
+  const [status, setStatus] = useState({color: '', mark: ''});
 
   // Keep track of the state of the Square
   return (
     <button
-      style={{backgroundColor: status.color}}
-      onClick={e => {
-        let randomColor = getRandomColor();
-        setStatus({color: randomColor, xo: xoArray[player]});
-        newState({id, player})
-      }}
-    >{status.xo}</button>
+      style={{color: status.color}}
+      onClick={!gameEnd && status.mark === '' ? e => {
+        console.log(gameEnd);
+          setStatus({color, mark});
+          newState({id, player});
+      } : null}
+    >{status.mark}</button>
   );
 
 }
 
-const Board = () => {
-  const [state, setState] = useState({squares: Array(9).fill(null), player: 0});
-  console.log(`adding state ${JSON.stringify(state.squares)}`);
+const Game = () => {
+  const players = [
+    {number: 0, mark: 'X', color: 'red', winner: false},
+    {number: 1, mark: 'O', color: 'blue', winner: false}
+  ]
+  const [state, setState] = useState({squares: Array(9).fill(null), player: players[0], gameEnd: false});
 
-  const checkWinner = (state) => {
+  const checkWinner = (squares, player, nextPlayer) => {
     const win = [
       [0,1,2],
       [3,4,5],
@@ -43,45 +38,47 @@ const Board = () => {
   
     for (let i = 0; i < win.length; i++) {
       const [a, b, c] = win[i];
-      console.log(`checkState: ${state[a]} ${state[b]} ${state[c]}`);
 
-      if (state[a] && state[a] === state[b] && state[a] === state[c]) {
-        console.log(`checkWinner: ${state[a]}`);
-        return state[a];
+      if (squares[a] !== null && squares[a] === squares[b] && squares[a] === squares[c]) {
+        setState({squares, player: players[player], gameEnd: true});
+        return;
       }
     }
+
+    setState({squares, player: players[nextPlayer], gameEnd: false});
   }
 
-  console.log(checkWinner(state.squares));
 
   const newState = (object) => {
-    const nextPlayer = (state.player + 1) % 2;
-    console.log(state.squares[object.id]);
-    console.log(object.player);
-
+    const nextPlayer = (object.player + 1) % 2;
     state.squares[object.id] = object.player;
-    setState({squares: state.squares, player: nextPlayer});
-  }
-
-  function renderSquare(i) {
-    return <Square id={i} player={state.player} newState={newState}></Square>;
+    checkWinner(state.squares, object.player, nextPlayer);
   }
 
   return (
-    <div className="game-board">
-      <div className="grid-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
+    <Fragment>
+      <div className="header"><h1>Tic-Tac-Toe</h1></div>
+      <div className="game-board">
+        {Array(9).fill(0).map((item, i) => {
+          return (
+            <Mark 
+              key={i} 
+              id={i} 
+              player={state.player.number}
+              mark={state.player.mark}
+              color={state.player.color} 
+              newState={newState}
+              gameEnd={state.gameEnd}
+            ></Mark>
+          );
+        })}
+        <div className="info" id="info">
+          <h1 style={{color: state.player.color}}>{!state.gameEnd ? `${state.player.mark}'s turn` : `${state.player.mark} wins!`}</h1>
+        </div>
       </div>
-      <div id="info">
-        {/* <button>Show/Hide Row</button>
-        <button>Re-render</button> */}
-        <h1>Player {state.player + 1}'s turn</h1>
-      </div>
-    </div>
+    </Fragment>
   );
 
 }
 
-ReactDOM.render(<Board />, document.getElementById('root'));
+ReactDOM.render(<Game />, document.getElementById('root'));
