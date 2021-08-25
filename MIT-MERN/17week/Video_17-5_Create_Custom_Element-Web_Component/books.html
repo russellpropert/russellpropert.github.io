@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="books.css">
+
+    <title>Books</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Books</h1>
+
+      <mit-book
+        title="Eloquent JavaScript, Second Edition"
+        subtitle="A Modern Introduction to Programming"
+        author="Marijn Haverbeke"
+        publisher="No Starch Press"
+        description="JavaScript lies at the heart fo almost every modern web application, from social apps to the 
+        newest browser-bassed games. Though simple for beginners to pick up and play with, JavaScript
+        is a flexible, complex languge that you can use to build full-scale applications."
+      ></mit-book>
+
+      <div class="card">
+        <h5 class="card-header">Eloquent JavaScript, Second Edition</h5>
+        <div class="card-body">
+          <h5 class="card-title">A Modern Introduction to Programming</h5>
+          <p class="card-text">
+            <table class="table">
+              <tr>
+                <td class="text-success font-weight-bold">Title:</td>
+                <td>Eloquent JavaScript, Second Edition</td>
+              </tr>
+              <tr>
+                <td class="text-success font-weight-bold">Subtitle:</td>
+                <td>A Modern Introduction to Programming</td>
+              </tr>
+              <tr>
+                <td class="text-success font-weight-bold">Author:</td>
+                <td>Marijn Haverbeke</td>
+              </tr>
+              <tr>
+                <td class="text-success font-weight-bold">Publisher:</td>
+                <td>No Starch Press</td>
+              </tr>
+              <tr>
+                <td class="text-success font-weight-bold">Description:</td>
+                <td>
+                  JavaScript lies at the heart fo almost every modern web application, from social apps to the 
+                  newest browser-bassed games. Though simple for beginners to pick up and play with, JavaScript
+                  is a flexible, complex languge that you can use to build full-scale applications.
+                </td>
+              </tr>
+            </table>
+          </p>
+        </div>
+      </div>  
+
+    </div>
+
+    <script src="books.js"></script>
+
+  </body>
+</html>
