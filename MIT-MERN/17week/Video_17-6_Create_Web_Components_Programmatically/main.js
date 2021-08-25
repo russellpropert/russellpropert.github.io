@@ -7,13 +7,14 @@ window.addEventListener('load', () => {
 async function createBookList() {
   const response = await fetch('./books.json');
   const json = await response.json();
-  const books = document.getElementById('books');
+
+  const booksDiv = document.getElementById('books');
 
   json.books.forEach((book) => {
     const element = document.createElement('mit-book');
     console.log(element);
-    element.bookTest = book;
-    books.appendChild(element);
+    element.bookData = book;
+    booksDiv.appendChild(element);
   });
 
 }

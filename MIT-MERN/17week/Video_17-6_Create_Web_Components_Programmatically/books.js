@@ -4,7 +4,7 @@ class Book extends HTMLElement{
   
   }
 
-  set bookTest(bookObject) {
+  set bookData(bookObject) {
 
     this.innerHTML = `
       <div class="card">
