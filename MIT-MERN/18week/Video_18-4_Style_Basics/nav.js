@@ -10,11 +10,11 @@ function Nav({getTab}) {
 
   return (
     <nav className="nav nav-tabs justify-content-center">
-      <a className="nav-item"
+      <Link className="nav-item"
         className={tab === 'home' ? 'nav-link active' : 'nav-link'} 
         onClick={tab !== 'home' ? () => setTab('home') : false} 
-        href="#/"
-      >Home</a>
+        to="/"
+      >Home</Link>
       <Link className="nav-item"
         className={tab === 'about' ? 'nav-link active' : 'nav-link'} 
         onClick={tab !== 'about' ? () => setTab('about') : false} 
