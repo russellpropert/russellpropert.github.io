@@ -5,10 +5,10 @@ function Home() {
       txtColor="dark"
       headerColor="primary"
       headerTxtColor="light"
-      header="Create Account"
+      header="Bad Bank"
       title="Welcome to the bank."
       text="This is a card for the home page of this bank demo."
-      body={<img src="bank.png" className="img-fluid" alt="bank image" />}
+      body={<img src="bank.png" className="img-fluid mx-auto d-block" alt="bank image" style={{margin: '40px'}} />}
     />
   );
 }

@@ -29,13 +29,13 @@ function Card(props) {
   }
 
   return (
-    <div className={mainClasses()} style={{maxWidth: "40rem"}}>
+    <div className={mainClasses()} style={{maxWidth: "800px", margin: "40px auto 0"}}>
       <div className={headerClasses()}>{props.header}</div>
       <div className="card-body">
         {props.title && (<h5 className="card-title">{props.title}</h5>)}
         {props.text && (<h5 className="card-text">{props.text}</h5>)}
         {props.body}
-        {props.status && (<div id="createStatus">{props.status}</div>)}
+        {props.errorMessage && (<div id="status">{props.errorMessage.map((error) => <div key={error.key}>{error.error}<br/></div>)}</div>)}
       </div>
     </div>
   );

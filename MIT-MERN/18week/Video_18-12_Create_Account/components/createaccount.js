@@ -1,16 +1,15 @@
 function CreateAccount() {
-  const [show, setShow]             = useState(true);
-  const [status, setStatus]         = useState('');
-  const [firstName, setFirstName]   = useState('');
-  const [lastName, setLastName]   = useState('');
-  const [email, setEmail]           = useState('');
-  const [password, setPassword]     = useState('');
+  const [show, setShow]                   = useState(true);
+  const [errorMessage, setErrorMessage]   = useState(false);
+  const [firstName, setFirstName]         = useState('');
+  const [lastName, setLastName]           = useState('');
+  const [email, setEmail]                 = useState('');
+  const [password, setPassword]           = useState('');
   const context = useContext(Context);
 
-  function validate(field, label) {
+  function validate(field, label, errors, key) {
     if (!field) {
-      setStatus(`Error: ${label}`);
-      setTimeout(() => setStatus(''), 3000);
+      errors.push({error: `${label} must be filled out.`, key})
       return false;
     }
     return true;
@@ -25,14 +24,19 @@ function CreateAccount() {
   }
 
   function handleCreate() {
-    console.log(firstName, lastName, email, password);
-    if (!validate(firstName,  'first name'))   return;
-    if (!validate(lastName,   'last name'))   return;
-    if (!validate(email,      'email'))       return;
-    if (!validate(password,   'password'))    return;
-    context.users.push({firstName, lastName, email, password, balance: 10000});
-    console.log(context.users);
-    setShow(false);
+    let errors = [];
+    if (!validate(firstName,  'First name', errors, 'firstName'));
+    if (!validate(lastName,   'Last name',  errors, 'lastName'));
+    if (!validate(email,      'Email',      errors, 'email'));
+    if (!validate(password,   'Password',   errors, 'password'));
+    if (errors.length) {
+      setErrorMessage(errors);
+      setTimeout(() => setErrorMessage(false), 3000);
+    } else {
+      context.users.push({firstName, lastName, email, password, balance: 10000});
+      console.log(context.users);
+      setShow(false);
+    }
   }
 
   return (
@@ -41,8 +45,8 @@ function CreateAccount() {
       txtColor="dark"
       headerColor="primary"
       headerTxtColor="light"
-      header="Bad Bank Landing Page"
-      status={status}
+      header="Create Account"
+      errorMessage={errorMessage}
       body={show ? (
         <>
           <label>First Name</label>
