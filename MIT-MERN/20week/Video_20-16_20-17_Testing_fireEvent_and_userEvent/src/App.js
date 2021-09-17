@@ -37,6 +37,7 @@ const App = () => {
   return (
     <div className="to-do-card">
       <h1>To-do List</h1>
+      <hr />
       <p>Enter a new list item below. Click on a list item to delete it.</p>
       <div className="app">
         <div>
