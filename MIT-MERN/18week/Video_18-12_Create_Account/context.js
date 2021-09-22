@@ -4,28 +4,44 @@ const {createContext, useContext, useState} = React;
 const Context = createContext(null);
 
 let data = {
+  nextUserID: 2,
   users: [
     {
-      firstName: 'Test',
-      lastName: 'User',
-      email: 'testuser@mail.com',
-      password: 'somehash',
-      balance: 10000
+      userID: 0,
+      firstName: 'Tester0',
+      lastName: 'Tester',
+      email: 'tester0@test.com',
+      password: 'test0',
+      balance: 0
+    },
+    {
+      userID: 1,
+      firstName: 'Tester1',
+      lastName: 'Tester',
+      email: 'tester1@test.com',
+      password: 'test1',
+      balance: 0
     }
   ]
 }
 
+function validateNumber(inputValue) {
+  if (isNaN(parseFloat(inputValue))) return 'Only numbers can be endered';
+  if (inputValue < 1) return 'At least one dollar needs to be entered.';
+}
+
 function Card(props) {
-  function mainClasses() {
-    const bg = props.bgColor ? ` bg-${props.bgcClor}` : ' ';
-    const txt = props.txtColor ? ` text-${props.txtColor}` : ' text-white';
-    return `card mb-3${bg}${txt}`
-  }
 
   function headerClasses() {
-    const bg = props.headerColor ? ` bg-${props.headerColor}` : ' ';
-    const txt = props.headerTxtColor ? ` text-${props.headerTxtColor}` : ' text-white';
+    const bg = props.headerColor ? ` bg-${props.headerColor}` : ' bg-primary';
+    const txt = props.headerTxtColor ? ` text-${props.headerTxtColor}` : ' text-light';
     return `card-header${bg}${txt}`
+  }
+
+  function mainClasses() {
+    const bg = props.bgColor ? ` bg-${props.bgcClor}` : ' bg-white';
+    const txt = props.txtColor ? ` text-${props.txtColor}` : ' text-black';
+    return `card mb-3${bg}${txt}`
   }
 
   return (
@@ -35,7 +51,6 @@ function Card(props) {
         {props.title && (<h5 className="card-title">{props.title}</h5>)}
         {props.text && (<h5 className="card-text">{props.text}</h5>)}
         {props.body}
-        {props.errorMessage && (<div id="status">{props.errorMessage.map((error) => <div key={error.key}>{error.error}<br/></div>)}</div>)}
       </div>
     </div>
   );

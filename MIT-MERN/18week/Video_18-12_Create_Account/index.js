@@ -1,17 +1,41 @@
 function Spa() {
+
+  const [currentUser, setCurrentUser] = useState(
+  {
+    userID: 0,
+    firstName: 'Test0',
+    lastName: 'Tester',
+    email: 'test0@test.com',
+    password: 'test0',
+    balance: 0
+  });
+
   return (
-    <HashRouter>
-        <NavBar />
-        <Context.Provider value={data}>
+    <div className="container" style={{maxWidth: "800px"}}>
+      <HashRouter>
+        <Context.Provider value={{data, currentUser, setCurrentUser, validateNumber}}>
+          <NavBar />
           <Route path="/" exact         component={Home} />
-          <Route path="/createAccount"  component={CreateAccount} />
-          <Route path="/login"          component={Login} />
-          <Route path="/deposit"        component={Deposit} />
-          <Route path="/withdraw"       component={Withdraw} />
-          <Route path="/balance"        component={Balance} />
-          <Route path="/allData"        component={AllData} />
-      </Context.Provider>
-    </HashRouter>
+          {currentUser !== null ?
+          <Route path="/CreateAccount"  component={PageNotAvailable} /> :
+          <Route path="/CreateAccount"  component={CreateAccount} />
+          }
+          {currentUser !== null ?
+            <Route path="/Deposit"      component={Deposit} /> :
+            <Route path="/Deposit"      component={PageNotAvailable} />
+          }
+          {currentUser !== null ? 
+            <Route path="/Withdraw"     component={Withdraw} /> : 
+            <Route path="/Withdraw"     component={PageNotAvailable} />
+          }
+          {currentUser !== null ? 
+          <Route path="/AllData"        component={AllData} /> :
+          <Route path="/AllData"        component={PageNotAvailable} />
+          }
+          <Route path="/Login"          component={Login} />
+        </Context.Provider>
+      </HashRouter>
+    </div>
   );
 }
 
