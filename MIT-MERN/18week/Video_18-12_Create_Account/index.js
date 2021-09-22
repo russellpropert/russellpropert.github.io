@@ -3,17 +3,19 @@ function Spa() {
   const [currentUser, setCurrentUser] = useState(
   {
     userID: 0,
-    firstName: 'Test0',
-    lastName: 'Tester',
-    email: 'test0@test.com',
-    password: 'test0',
+    firstName: 'Tester',
+    lastName: 'Lastname',
+    email: 'tester@test.com',
+    password: 'test1234',
     balance: 0
   });
+
+  console.log(data.logs);
 
   return (
     <div className="container" style={{maxWidth: "800px"}}>
       <HashRouter>
-        <Context.Provider value={{data, currentUser, setCurrentUser, validateNumber}}>
+        <Context.Provider value={{data, currentUser, setCurrentUser, validateNumber, createLog}}>
           <NavBar />
           <Route path="/" exact         component={Home} />
           {currentUser !== null ?

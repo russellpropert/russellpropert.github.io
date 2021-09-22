@@ -1,5 +1,5 @@
 const {HashRouter, Link, Route} = ReactRouterDOM;
-const {createContext, useContext, useState} = React;
+const {createContext, useContext, useState, useEffect} = React;
 
 const Context = createContext(null);
 
@@ -8,26 +8,65 @@ let data = {
   users: [
     {
       userID: 0,
-      firstName: 'Tester0',
-      lastName: 'Tester',
-      email: 'tester0@test.com',
-      password: 'test0',
+      firstName: 'Tester',
+      lastName: 'Lastname',
+      email: 'tester@test.com',
+      password: 'tester1234',
       balance: 0
     },
     {
       userID: 1,
-      firstName: 'Tester1',
-      lastName: 'Tester',
-      email: 'tester1@test.com',
-      password: 'test1',
+      firstName: 'User',
+      lastName: 'Lastname',
+      email: 'user@test.com',
+      password: 'user1234',
       balance: 0
     }
+  ],
+  nextTransactionID: 2,
+  logs: [
+    {
+      transactionID: 0,
+      transactionDate: '2021-09-22',
+      transactionTime: '12:59:23',
+      transactionType: 'Account Creation',
+      userID: 0,
+      amount: null,
+      balance: 0
+    },
+    {
+      transactionID: 1,
+      transactionDate: '2021-09-22',
+      transactionTime: '13:05:52',
+      transactionType: 'Account Creation',
+      userID: 1,
+      amount: null,
+      balance: 0
+    }    
   ]
 }
 
 function validateNumber(inputValue) {
-  if (isNaN(parseFloat(inputValue))) return 'Only numbers can be endered';
+  if (!inputValue) return;
+  if (isNaN(Number(inputValue))) return 'Only numbers can be endered';
   if (inputValue < 1) return 'At least one dollar needs to be entered.';
+}
+
+function createLog(context, transactionType, userID, amount, balance) {
+  const dateTime = new Date();
+  context.data.logs.push(
+    {
+      transactionID: context.data.nextTransactionID,
+      transactionDate: `${dateTime.getMonth() + 1}/${dateTime.getDate()}/${dateTime.getFullYear()}`,
+      transactionTime: `${`0${dateTime.getHours()}`.slice(-2)}:${`0${dateTime.getMinutes()}`.slice(-2)}:${`0${dateTime.getSeconds()}`.slice(-2)}`,
+      transactionType: transactionType,
+      userID: userID,
+      amount: amount,
+      balance: balance
+    }
+  );
+
+  context.data.nextTransactionID++;
 }
 
 function Card(props) {

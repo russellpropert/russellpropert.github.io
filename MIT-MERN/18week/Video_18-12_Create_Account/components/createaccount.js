@@ -7,37 +7,50 @@ function CreateAccount() {
   const [lastName, setLastName]             = useState('');
   const context = useContext(Context);
 
-  let isError = false;
   let errorMessagesFromValidate = {};
 
   function createError(name, message) {
     errorMessagesFromValidate[name] = message;
-    isError = true;
   }
 
   function validate(field, name) {
     if (name === 'password' && field.length < 8) createError(name, 'Choose a password with at least 8 characters.');
     if ((name === 'firstName' || name === 'lastName') && field.length < 2) createError(name, 'Names must have at least two characters.');
-    if ((name === 'firstName' || name === 'lastName') && !field.match(/^[A-Za-z]+$/)) createError(name, 'Names can only contain letters.');
+    if ((name === 'firstName' || name === 'lastName') && !field.match(/^[A-Za-z\s]+$/)) createError(name, 'Names can only contain letters. Spaces are allowed.');
+    if (name === 'email' && !field.match(/^.+[@]/)) createError(name, 'Please include the @ symbol.');
+    if (name === 'email' && field.match(/^[@]/)) createError(name, 'Cannot begin with @.');
+    if (name === 'email' && field.match(/^.+[@]$/)) createError(name, 'Please include a domain.');
     if (name === 'email' && context.data.users.find(user => user.email === field)) createError(name, 'An account with that email already exists.');
     if (!field) createError(name, 'This field cannot be blank.');
 
   }
 
-  function handleCreate(event) {
-    event.preventDefault();
-
+  useEffect (() => {
     validate(email, 'email');
     validate(password, 'password');
     validate(firstName, 'firstName');
     validate(lastName, 'lastName');
-    
-    if (isError) {
-      setErrorMessages(errorMessagesFromValidate);
-      return;
-    }
+    setErrorMessages(errorMessagesFromValidate);
+  }, [email, password, firstName, lastName]);
 
-    context.data.users.push({userID: context.data.nextUserID, firstName, lastName, email, password, balance: 0});
+  function handleCreate(event) {
+    event.preventDefault();
+    if (Object.keys(errorMessages).length) return;
+
+    // Add user to system
+    context.data.users.push(
+      {
+        userID: context.data.nextUserID, 
+        firstName, 
+        lastName, 
+        email, 
+        password, 
+        balance: 0
+      }
+    );
+
+    // Log user add
+    createLog(context, 'Account Creation', context.data.nextUserID, null, 0);
     context.data.nextUserID++;
     setShowForm(false);
   }
@@ -111,7 +124,7 @@ function CreateAccount() {
 
           <button
             type="submit"
-            className="btn btn-primary"
+            className={Object.keys(errorMessages).length ? "btn btn-primary disabled" : "btn btn-primary"}
           >Create Account</button>
         </form>
       ) : (

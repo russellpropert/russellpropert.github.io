@@ -4,41 +4,39 @@ function Login() {
   const [password, setPassword]             = useState('');
   const context = useContext(Context);
 
-  let isError = false;
   let errorMessagesFromValidate = {};
 
   function createError(name, message) {
     errorMessagesFromValidate[name] = message;
-    isError = true;
   }
 
-  function validate(field, name) {
-    if (!field) createError(name, 'This field cannot be blank.');
-
+  function clearForm() {
+    setEmail('');
+    setPassword('');
   }
 
   function handleLogin(event) {
     event.preventDefault();
 
-    validate(email, 'email');
-    validate(password, 'password');
-    
-    if (isError) {
-      setErrorMessages(errorMessagesFromValidate);
-      return;
-    }
-
+    // Set current user
     const user = context.data.users.find(user => user.email === email && user.password === password);
     context.setCurrentUser(user ? user : null);
 
-    if (!user && !errorMessagesFromValidate.length) {
+    // Log if successful
+    if (user) {
+      context.createLog(context, 'Login', user.userID, null, null);
+    }
+
+    // Set error if user does not exist
+    if (!user) {
       createError('authenticationFail', 'The email or password is invalid.');
       setErrorMessages(errorMessagesFromValidate);
+      setTimeout(() => setErrorMessages({}), 3000);
+      clearForm();
       return;
     }
-    
-    setEmail('');
-    setPassword('');
+
+    clearForm();
     setErrorMessages(false);
   }
 
@@ -59,8 +57,7 @@ function Login() {
             autoComplete="email"
             onChange={(event) => setEmail(event.currentTarget.value)}
           ></input>
-          {errorMessages.email ? <div className="error-message">{errorMessages.email}</div> : <div className="error-message">&nbsp;</div>}
-
+          <div className="error-message">&nbsp;</div>
 
           <label htmlFor="password">Password</label>
           <input
@@ -73,12 +70,12 @@ function Login() {
             autoComplete="current-password"
             onChange={(event) => setPassword(event.currentTarget.value)}
           ></input>
-          {errorMessages.password ? <div className="error-message">{errorMessages.password}</div> : <div className="error-message">&nbsp;</div>}
+          <div className="error-message">&nbsp;</div>
 
           <div>
             <button style={{display: "inline-block"}}
               type="submit"
-              className="btn btn-primary"
+              className={(!email || !password) ? "btn btn-primary disabled" : 'btn btn-primary'}
             >Login</button>
             {errorMessages.authenticationFail ? <div style={{display: "inline-block", margin: "0 20px"}} className="error-message align-middle">{errorMessages.authenticationFail}</div> : <div style={{display: "inline-block"}} className="error-message">&nbsp;</div>}
           </div>

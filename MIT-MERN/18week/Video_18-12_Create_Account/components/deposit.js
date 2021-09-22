@@ -1,22 +1,33 @@
 function Deposit() {
   const [showForm, setShowForm]             = useState(true);
-  const [depositAmount, setDepositAmount]   = useState(0);
+  const [depositAmount, setDepositAmount]   = useState('');
   const [depositError, setDepositError]     = useState(false);
   const context = useContext(Context);
 
   const userIndex = context.data.users.findIndex(user => user.userID === context.currentUser.userID);
 
-  function handleDeposit(event) {
-    event.preventDefault();
+  useEffect(() => {
     const depositError = context.validateNumber(depositAmount);
     if (depositError) {
       setDepositError(depositError)
       return;
     }
+    setDepositError(false);
+  }
+  , [depositAmount]);
 
-    context.data.users[userIndex].balance += Number(depositAmount);;
+  function handleDeposit(event) {
+    event.preventDefault();
+
+    // Deposit Money
+    context.data.users[userIndex].balance += Number(depositAmount);
+
+    // Log Withdraw
+    context.createLog(context, 'Deposit', context.currentUser.userID, depositAmount, context.data.users[userIndex].balance);
+
     setShowForm(false);
-    setDepositAmount(0);
+    setDepositAmount('');
+    setDepositError(false);
   }
 
   return (
@@ -33,7 +44,7 @@ function Deposit() {
             className="form-control"
             autoFocus
             // required
-            type="number"
+            type="text"
             name="depositAmount"
             id="depositAmount"
             value={depositAmount}
@@ -42,20 +53,19 @@ function Deposit() {
           {depositError ? <div className='error-message margin-bottom'>{depositError}</div> : <div className='error-message margin-bottom'>&nbsp;</div>}
           <button
             type="submit"
-            className="btn btn-primary"
+            className={!depositAmount || depositError ? "btn btn-primary disabled" : "btn btn-primary"}
           >Deposit</button>
         </form>
         </>
       ) : (
-        <>
+        <form onSubmit={setShowForm}>
           <h5>Your new ballance is: ${context.data.users[userIndex].balance}</h5>
           <h5>Would you like to make another deposit?</h5>
           <button
             type="submit"
             className="btn btn-primary"
-            onClick={setShowForm}
           >Make Another Deposit</button>
-        </>
+        </form>
       )}
     />
   );

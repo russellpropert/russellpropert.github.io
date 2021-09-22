@@ -123,8 +123,9 @@ function NavBar() {
                 className="nav-link" 
                 href="#/Login" 
                 onClick={() => {
-                    context.setCurrentUser(null); 
-                    setUrlHash('#/Login')
+                  context.createLog(context, 'Logout', context.currentUser.userID, null, null)
+                  context.setCurrentUser(null);
+                  setUrlHash('#/Login')
                 }} 
                 data-toggle="tooltip" 
                 data-placement="bottom" 
