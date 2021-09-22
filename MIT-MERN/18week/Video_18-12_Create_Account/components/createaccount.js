@@ -111,7 +111,7 @@ function CreateAccount() {
 
           <button
             type="submit"
-            className="btn btn-primary disabled"
+            className="btn btn-primary"
           >Create Account</button>
         </form>
       ) : (
