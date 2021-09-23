@@ -13,6 +13,7 @@ function NavBar() {
         data-toggle="tooltip" 
         data-placement="bottom" 
         title="Home page for The Fake Bank."
+        style={{marginLeft: "10px"}}
         >The Fake Bank</a>
 
       <button 
