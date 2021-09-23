@@ -5,8 +5,8 @@ function AllData() {
   return (
     <Card
       header="All Data"
-      body= 
-        {<div className="contianer">
+      body={
+        <div className="contianer">
 
           {/* Users */}
           <h4>List Of Users</h4>
@@ -23,7 +23,8 @@ function AllData() {
             </div>
           )}
           <br />
-          {/* logss */}
+          
+          {/* logs */}
           <h4>Transaction logs</h4>
           {context.data.logs.map(logs => 
             <div key={logs.transactionID}>
@@ -41,9 +42,9 @@ function AllData() {
             </div>
           )}          
 
-        </div>}
-
-
+        </div>
+      }
     />
   );
+
 }

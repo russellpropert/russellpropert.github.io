@@ -1,11 +1,9 @@
+
 function Home() {
 
   const context = useContext(Context);
   let userIndex;
   if (context.currentUser !== null) userIndex = context.data.users.findIndex(user => user.userID === context.currentUser.userID);
-
-  console.log(context.currentUser);
-  console.log(userIndex);
 
   return (
     <Card 
@@ -18,14 +16,15 @@ function Home() {
       text={context.currentUser !== null ?
          `Your current balance is $${context.data.users[userIndex].balance}. Click on Deposit to put money in your account and Withdraw
          to take some out. You can see all of the site's users and transactions in All Data.`:
-        `This is page demonstrates a single page app created with React. Click on Create Account to create your account 
+        `This is page demonstrates a single page application created with React. Click on Create Account to create your account 
          and then log in. You’ll be given options to Deposit and Withdraw money and to view All Data to see all of the site's 
-         users and transaction logs.`
+         users and transactions.`
       }
 
       body={<img src="bank.png" className="img-fluid mx-auto d-block" alt="bank image" style={{margin: '40px'}} />}
     />
   );
+  
 }
 
 
