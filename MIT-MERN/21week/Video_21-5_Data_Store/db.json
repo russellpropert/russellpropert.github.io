@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "test1",
+      "publish": true
+    },
+    {
+      "id": 2,
+      "title": "test2",
+      "publish": true
+    },
+    {
+      "id": 3,
+      "title": "test3",
+      "publish": false
+    },
+    {
+      "id": 4,
+      "title": "test4",
+      "publish": true
+    },
+    {
+      "id": 1,
+      "title": "test1",
+      "publish": true
+    },
+    {
+      "id": 2,
+      "title": "test2",
+      "publish": true
+    },
+    {
+      "id": 3,
+      "title": "test3",
+      "publish": false
+    },
+    {
+      "id": 4,
+      "title": "test4",
+      "publish": true
+    },
+    {
+      "id": 1,
+      "title": "test1",
+      "publish": true
+    },
+    {
+      "id": 2,
+      "title": "test2",
+      "publish": true
+    },
+    {
+      "id": 3,
+      "title": "test3",
+      "publish": false
+    },
+    {
+      "id": 4,
+      "title": "test4",
+      "publish": true
+    }
+  ]
+}
