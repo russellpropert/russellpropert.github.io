@@ -70,7 +70,7 @@
         superAgent(url);
     }
 
-    function findPublish(event) {
+    function findPublish() {
         const publish = document.getElementById('findPublish').checked;
         const url = `/published/${publish}`
         console.log(publish);
@@ -89,7 +89,7 @@
         event.preventDefault();
     }
 
-    function updatePublish(event) {
+    function updatePublish() {
         const id = document.getElementById('updateID').value;
         const publish = document.getElementById('updatePublish').checked;
         const url = `/published/${id}/${publish}`
