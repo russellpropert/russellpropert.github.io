@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/3.8.3/superagent.min.js"></script>
+
+<body>
+
+    <main role="main" class="container" style="margin-top:20px">
+
+        <div id="status"></div>        
+        <button type="button" class="btn btn-primary" onclick="data()">Show All Data</button><br/><br/>
+
+        <form>
+            <label for="id">ID</label><br/>
+            <input type="number" id="id"><br/>
+            <label for="title">Title</label><br/>
+            <input type="text" id="title"><br/>
+            <label for="publish">Publish</label><br/>
+            <input type="checkbox" id="publish"><br/>
+            <button type="submit" class="btn btn-primary" onclick="update(event)">Update Data</button><br/><br/>
+        </form>
+
+        <form>
+            <label for="id">ID</label><br/>
+            <input type="number" id="id"><br/>
+            <button type="submit" class="btn btn-primary" onclick="deleteRow(event)">Delete Row</button><br/><br/>
+        </form>
+
+    </main>
+
+</body>
+<script>
+
+    function superAgent(status, url) {
+        superagent
+            .get(url)
+            .end(
+                function(err, res) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(res);
+                        status.innerHTML = JSON.stringify(res.body);
+                    }
+                }
+            );
+    }
+
+    function data() {
+        const status  = document.getElementById('status');
+        const url = '/data';
+        superAgent(status, url);
+    }
+
+    function update(event) {
+        const id = Number(event.target.form.elements.id.value);
+        const title = event.target.form.elements.title.value;
+        const publish = event.target.form.elements.publish.checked;
+
+        const status = document.getElementById('status');
+        const url = `/posts/${title}/${id}/${publish}`;
+
+        console.log(id);
+        console.log(title);
+        console.log(publish);
+
+        superAgent(status, url);
+
+        event.preventDefault();
+    }
+
+    function deleteRow(event) {
+        const id = Number(event.target.form.elements.id.value);
+
+        const status = document.getElementById('status');
+        const url = `/delete/${id}`;
+
+        console.log(id);
+
+        superAgent(status, url);
+
+        event.preventDefault();
+    }
+
+
+</script>
+</html>
