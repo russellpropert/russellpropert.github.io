@@ -41,7 +41,7 @@ app.post('/add', function(req, res) {
     'username': req.body.username,
     'password': req.body.password,
     'phone': req.body.phone,
-    'streetaddress': req.body.treetaddress,
+    'streetaddress': req.body.streetaddress,
     'citystatezip': req.body.citystatezip,
     'latitude': req.body.latitude,
     'longitude': req.body.longitude,
