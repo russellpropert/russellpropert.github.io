@@ -1,0 +1,16 @@
+{
+  "name": "video_22-2_initialize_data_store",
+  "version": "1.0.0",
+  "description": "Users App",
+  "main": "http-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "russellpropert@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "name": "Russell",
+      "dob": "2021",
+      "email": "russell@russell.com",
+      "username": "rusty",
+      "password": "somestring",
+      "phone": "none",
+      "citystatezip": "New Jersey",
+      "latitude": "42",
+      "longitude": "-79",
+      "avatar": "me"
+    },
+    {
+      "name": "Russell",
+      "dob": "2021",
+      "email": "russell@russell.com",
+      "username": "rusty",
+      "password": "somestring",
+      "phone": "none",
+      "streetaddress": "somestreet",
+      "citystatezip": "New Jersey",
+      "latitude": "42",
+      "longitude": "-79",
+      "avatar": "me"
+    }
+  ]
+}
