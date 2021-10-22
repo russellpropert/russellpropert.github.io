@@ -1,0 +1,13 @@
+{
+  "name": "video_23-14_vs_code_yarn_vs_npm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "russellpropert@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
