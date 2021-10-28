@@ -1,0 +1,15 @@
+{
+  "name": "jwt-exercise",
+  "version": "1.0.0",
+  "description": "JSON Web Token Authentication Exercise",
+  "main": "auth.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "russellpropert@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
