@@ -9,7 +9,7 @@ const swaggerDocument =
       "email": "me@me.com"
     },
   },
-  "host": "swagger-document-exercise.herokuapp.com",
+  "host": "localhost:4000",
   "basePath": "/",
   "tags": [
     {
@@ -22,7 +22,7 @@ const swaggerDocument =
     }
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/shapes": {
