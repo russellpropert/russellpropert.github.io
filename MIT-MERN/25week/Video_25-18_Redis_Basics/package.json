@@ -1,0 +1,16 @@
+{
+  "name": "video_25-18_redis_basics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "key_get_set.js",
+  "type": "module",
+  "scripts": {
+    "start": "node key_get_set.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Russell Propert",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^3.1.2"
+  }
+}
