@@ -33,9 +33,9 @@ function Data(props) {
   );
 }
 
-function update(section, value) {
+function read() {
   return new Promise((resolve, reject) => {
-    const url = `/update/${section}/${value}`;
+    const url = '/data';
     superagent
       .get(url)
       .end((err, res) => {
@@ -44,11 +44,11 @@ function update(section, value) {
   });
 }
 
-function read() {
+function update(section, value) {
   return new Promise((resolve, reject) => {
-    const url = '/data';
+    const url = `/update/${section}/${value}`;
     superagent
-      .get(url)
+      .post(url)
       .end((err, res) => {
         err ? reject(null) : resolve(res.body);
       });
