@@ -56,13 +56,17 @@ function update(section, value) {
 }
 
 function App() {
-  const [data, setData] = React.useState({header: 0, left: 0, article: 0, right: 0, footer: 0});
+  const [data, setData] = React.useState({});
 
-  function handle(update) {
-    console.log('Update:', update);
-    const newValue = data[update.section] + update.value;
-    const object = {[update.section]: newValue};
-    setData({...data, ...object});
+  React.useEffect(() => {
+    // read database data and update UI
+    read().then(res => {setData(res)});
+  }, [])
+
+  function handle(change) {
+    // update database and local state
+    console.log(change.section, change.value);
+    update(change.section, change.value).then(res => (setData(res)));
   }
 
   return (
