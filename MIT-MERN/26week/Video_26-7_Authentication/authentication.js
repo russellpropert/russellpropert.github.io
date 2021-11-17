@@ -19,6 +19,7 @@
   const login = document.getElementById('login');
   const signup = document.getElementById('signup');
   const logout = document.getElementById('logout');
+  const message = document.getElementById('message');
 
   // Login
   login.addEventListener('click', e => {
@@ -43,6 +44,7 @@
       login.style.display = firebaseUser ? 'none' : 'inline';
       signup.style.display = firebaseUser ? 'none' : 'inline';
       logout.style.display = firebaseUser ? 'inline' : 'none';
+      message.innerHTML = firebaseUser ? `Logged in with ${firebaseUser.$b.email}` : null;
   });
 
 }());
