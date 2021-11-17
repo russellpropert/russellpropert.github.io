@@ -26,8 +26,9 @@
   // upload file
   upload.addEventListener('click', e => {
     // Create file reference
-    const ref = storageRef.child('globe');
-    let photo = document.getElementById('file').files[0];
+    const ref = storageRef.child('picture');
+    console.log(file.files);
+    let photo = file.files[0];
 
     // Upload
     ref.put(photo).then(function(snapshot) {
@@ -39,11 +40,12 @@
   // download file
   download.addEventListener('click', e => {
     // File reference
-    const ref = storage.ref('globe');
+    const ref = storage.ref('picture');
 
     ref.getDownloadURL().then(function(url) {
       // Insert URL into an <img> tag to "download"
       image.src = url;
+      console.log(url);
       status.innerHTML = 'Downloaded blob or file.'
     }).catch(function(error){console.log(error)});
   });
