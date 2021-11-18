@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authentication</title>
+
+  <style>
+    .box {
+      background-color:gainsboro;
+      padding:10px;
+      display:inline-block;
+      margin: 10px;
+      min-height: 40px;
+      width:250px;
+    }
+  </style>
+
+  <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+
+</head>
+<body>
+  <div class="box">
+    <label for="email">Email</label><br/>
+    <input type="email" id="email"/><br/>
+    <label for="password">Password</label><br/>
+    <input type="password" id="password"/><br/><br/>
+    <button id="login">Login</button>
+    <button id="signup">SignUp</button>
+    <button id="logout">Logout</button>
+    <div id="loginMsg"></div>
+  </div>
+
+  <br/>
+
+  <!-- call open/secure route box -->
+  <div class="box">
+    <button onclick="callOpenRoute()">Call Open Route</button>
+    <button onclick="callAuthRoute()">Call Auth Route</button>
+    <div id="routeMsg"></div>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
