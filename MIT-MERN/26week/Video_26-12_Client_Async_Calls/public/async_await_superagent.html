@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Client Async Calls</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/superagent/4.1.0/superagent.min.js" integrity="sha512-LJaxxgpiq7SihGQ21nejROsll6FRrgbs0Wxtgqb5x+Q0CJICA3vt8hlBxSD8NLsO+Yabgg3B7ARexiijKiojGg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+
+  <h1 id="async">async</h1>
+
+  <script>
+    const url = '/account/create/Russ/russ@email.com/secret'
+
+    const createAwait = async () => {
+      const response = await fetch(url);
+      const data = await response.json();
+      return data
+    }
+
+    const invoke01 = () => {
+      createAwait().then(data => {
+        document.getElementById('async').innerHTML = JSON.stringify(data);
+      });
+    }
+
+    const createSuperagentPromise = () => {
+      return superagent
+        .get(url);
+    }
+
+    const invoke02 = () => {
+      createSuperagentPromise().then(data => {
+        document.getElementById('async').innerHTML = JSON.stringify(data.body);
+      });
+    }
+
+  </script>
+
+</body>
+</html>
