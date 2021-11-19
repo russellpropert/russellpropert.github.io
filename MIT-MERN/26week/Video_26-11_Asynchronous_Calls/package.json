@@ -1,0 +1,17 @@
+{
+  "name": "video_26-11_asynchronous_calls",
+  "version": "1.0.0",
+  "description": "",
+  "main": "async_request.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon async_request.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.1.0"
+  }
+}
