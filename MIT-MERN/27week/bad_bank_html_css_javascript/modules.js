@@ -57,15 +57,15 @@ const loadDefault = () => {
 
 ui.createAccount = `
   <div class="card mb-3" style="max-width: 18rem;">
-    <div class="card-header text-white bg-primary">Create Account</div>
-    <div class="card-body text-black bg-white">
+    <div class="card-header text-white bg-secondary">Create Account</div>
+    <div class="card-body text-black bg-light">
       <label for="name">Name</label>
       <input type="text" id="name" class="form-control">
       <label for="email">Email</label>
       <input type="email" id="email" class="form-control">
       <label for="name">Password</label>
       <input type="text" id="password" class="form-control">
-      <button type="submit" id="submit" class="btn btn-primary" onclick="create()">Create Account</button>
+      <button type="submit" id="submit" class="btn btn-secondary" onclick="create()">Create Account</button>
       <div id="createStatus"></div>
     </div>
   </div>
@@ -77,13 +77,13 @@ const loadCreateAccount = () => {
 
 ui.login = `
   <div class="card mb-3" style="max-width: 18rem;">
-    <div class="card-header text-white bg-primary">Login</div>
+    <div class="card-header text-white bg-danger">Login</div>
     <div class="card-body text-black bg-white">
       <label for="email">Email</label>
       <input type="email" id="loginEmail" class="form-control">
       <label for="name">Password</label>
       <input type="text" id="loginPassword" class="form-control">
-      <button type="submit" id="submit" class="btn btn-primary" onclick="login()">Login</button>
+      <button type="submit" id="submit" class="btn btn-danger" onclick="login()">Login</button>
       <div id="loginStatus"></div>
     </div>
   </div>
@@ -95,11 +95,11 @@ const loadLogin = () => {
 
 ui.deposit = `
   <div class="card mb-3" style="max-width: 18rem;">
-    <div class="card-header text-white bg-primary">Deposit</div>
+    <div class="card-header text-white bg-success">Deposit</div>
     <div class="card-body text-black bg-white">
       <label for="deposit">Deposit</label>
       <input type="number" id="deposit" class="form-control">
-      <button type="submit" id="submit" class="btn btn-primary" onclick="deposit()">Deposit</button>
+      <button type="submit" id="submit" class="btn btn-success" onclick="deposit()">Deposit</button>
       <div id="depositStatus"></div>
     </div>
   </div>
@@ -111,11 +111,11 @@ const loadDeposit = () => {
 
 ui.withdraw = `
   <div class="card mb-3" style="max-width: 18rem;">
-    <div class="card-header text-white bg-primary">Withdraw</div>
+    <div class="card-header text-black bg-warning">Withdraw</div>
     <div class="card-body text-black bg-white">
       <label for="withdraw">Withdraw</label>
       <input type="number" id="withdraw" class="form-control">
-      <button type="submit" id="submit" class="btn btn-primary" onclick="withdraw()">Withdraw</button>
+      <button type="submit" id="submit" class="btn btn-warning" onclick="withdraw()">Withdraw</button>
       <div id="withdrawStatus"></div>
     </div>
   </div>
@@ -127,11 +127,11 @@ const loadWithdraw = () => {
 
 ui.balance = `
   <div class="card mb-3" style="max-width: 18rem;">
-    <div class="card-header text-white bg-primary">Balance</div>
+    <div class="card-header text-white bg-dark">Balance</div>
     <div class="card-body text-black bg-white">
       <label for="balance">Balance</label>
       <input type="number" id="balance" class="form-control">
-      <button type="submit" id="submit" class="btn btn-primary" onclick="balance()">Show Balance</button>
+      <button type="submit" id="submit" class="btn btn-dark" onclick="balance()">Show Balance</button>
       <div id="balanceStatus"></div>
     </div>
   </div>
@@ -143,10 +143,10 @@ const loadBalance = () => {
 
 ui.allData = `
   <div class="card mb-3" style="max-width: 18rem;">
-    <div class="card-header text-white bg-primary">All Data</div>
+    <div class="card-header text-black bg-info">All Data</div>
     <div class="card-body text-black bg-white">
-      <h5 class="card-title>All Data<h5>
-      <button type="submit" id="submit" class="btn btn-primary" onclick="allData()">Show All Data</button>
+      <h5 class="card-title">All Data test<h5>
+      <button type="submit" id="submit" class="btn btn-info" onclick="allData()">Show All Data</button>
       <div id="allDataStatus"></div>
     </div>
   </div>
