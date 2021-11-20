@@ -64,7 +64,7 @@ ui.createAccount = `
       <label for="email">Email</label>
       <input type="email" id="email" class="form-control">
       <label for="name">Password</label>
-      <input type="text" id="password" class="form-control">
+      <input type="password" id="password" class="form-control">
       <button type="submit" id="submit" class="btn btn-secondary" onclick="create()">Create Account</button>
       <div id="createStatus"></div>
     </div>
@@ -82,7 +82,7 @@ ui.login = `
       <label for="email">Email</label>
       <input type="email" id="loginEmail" class="form-control">
       <label for="name">Password</label>
-      <input type="text" id="loginPassword" class="form-control">
+      <input type="password" id="loginPassword" class="form-control">
       <button type="submit" id="submit" class="btn btn-danger" onclick="login()">Login</button>
       <div id="loginStatus"></div>
     </div>
@@ -129,8 +129,6 @@ ui.balance = `
   <div class="card mb-3" style="max-width: 18rem;">
     <div class="card-header text-white bg-dark">Balance</div>
     <div class="card-body text-black bg-white">
-      <label for="balance">Balance</label>
-      <input type="number" id="balance" class="form-control">
       <button type="submit" id="submit" class="btn btn-dark" onclick="balance()">Show Balance</button>
       <div id="balanceStatus"></div>
     </div>
@@ -142,11 +140,10 @@ const loadBalance = () => {
 }
 
 ui.allData = `
-  <div class="card mb-3" style="max-width: 18rem;">
+  <div class="card mb-3">
     <div class="card-header text-black bg-info">All Data</div>
     <div class="card-body text-black bg-white">
       <h5 class="card-title">All Data test<h5>
-      <p style="font-size: 1rem; font-weight: normal;">${JSON.stringify(context)}</p>
       <button type="submit" id="submit" class="btn btn-info" onclick="allData()">Show All Data</button>
       <div id="allDataStatus"></div>
     </div>
