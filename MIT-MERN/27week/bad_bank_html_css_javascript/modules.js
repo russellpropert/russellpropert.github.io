@@ -146,6 +146,7 @@ ui.allData = `
     <div class="card-header text-black bg-info">All Data</div>
     <div class="card-body text-black bg-white">
       <h5 class="card-title">All Data test<h5>
+      <p style="font-size: 1rem; font-weight: normal;">${JSON.stringify(context)}</p>
       <button type="submit" id="submit" class="btn btn-info" onclick="allData()">Show All Data</button>
       <div id="allDataStatus"></div>
     </div>
