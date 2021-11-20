@@ -156,4 +156,4 @@ const loadAllData = () => {
   target.innerHTML = ui.allData;
 }
 
-loadDefault();
+loadCreateAccount();
