@@ -34,7 +34,8 @@ function Cart () {
                     padding: 0,
                     width: "15px",
                     marginRight: "5px",
-                    marginLeft: "10px"
+                    marginLeft: "10px",
+                    textDecoration: "none"
                   }}
                   onClick={() => addItem(item)}
                   color="link"
@@ -45,6 +46,7 @@ function Cart () {
                     padding: 0,
                     width: "15px",
                     marginRight: "10px",
+                    textDecoration: "none"
                   }}
                   onClick={() => removeItem(item)}
                   color="link"
