@@ -1,4 +1,5 @@
-# This is my coding bootcamp repository.
->MIT xPRO Professional Certificate in Coding: Full Stack Development with MERN
+# My Personal Profile Website
 ## Description
-The contents of this repository document my progress for this course. The home folder contains a profile page with links to course work. The MIT-MERN folder contains all the projects I worked on during the course, divided by the course week.
+This website was my first project for MIT xPRO's "[Professional Certificate in Coding: Full Stack Development with MERN](https://xpro.mit.edu/programs/program-v1:xPRO+PCCx+R1/)." 
+* Bootstrap was used for styling
+* I wrote my own JavaScript code instead of using flexbox or Bootstrap on the "Code" page for collapsing the columns in narrower page views.
