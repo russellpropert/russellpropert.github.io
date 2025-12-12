@@ -1,0 +1,20 @@
+<script>
+  const buses = [];
+  async function getBuses(){
+    const url = 'https://api-v3.mbta.com/vehicles?filter[route]=1&include=trip';
+    const response = await fetch(url);
+    const result = await response.json();
+    const data = await result.data;
+    return data;
+  }
+
+  const destructureData = ({id, attributes: {label: label, longitude: longitude, latitude: latitude}}) => {
+    return {id, label, longitude, latitude};
+  }
+  
+  getBuses().then((data) => { 
+    data.forEach(a => buses.push(destructureData(a)));
+    console.log(data); //all the data
+    console.log(buses); //new array with only the needed data
+  });
+</script>
